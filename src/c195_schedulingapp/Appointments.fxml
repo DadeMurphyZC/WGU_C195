@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c195_schedulingapp.AppointmentsController">
+   <children>
+      <Pane prefHeight="60.0" prefWidth="1024.0" style="-fx-background-color: dimgray;">
+         <children>
+            <Button layoutX="37.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Customers" textFill="WHITE" />
+            <Button layoutX="137.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Appointments" textFill="WHITE" />
+            <Button layoutX="237.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Calendar" textFill="WHITE" />
+            <Button layoutX="337.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane layoutY="60.0" prefHeight="710.0" prefWidth="1024.0">
+         <children>
+            <TableView fx:id="appointmentsTable" prefHeight="678.0" prefWidth="1024.0">
+              <columns>
+                <TableColumn fx:id="idCol" prefWidth="113.7" text="ID" />
+                <TableColumn fx:id="customerCol" prefWidth="113.7" text="Customer" />
+                  <TableColumn fx:id="titleCol" prefWidth="113.7" text="Title" />
+                  <TableColumn fx:id="descriptionCol" prefWidth="113.7" text="Description" />
+                  <TableColumn fx:id="locationCol" prefWidth="113.7" text="Location" />
+                  <TableColumn fx:id="contactCol" prefWidth="113.7" text="Contact" />
+                  <TableColumn fx:id="urlCol" prefWidth="113.7" text="URL" />
+                  <TableColumn fx:id="startCol" prefWidth="113.7" text="Start" />
+                  <TableColumn fx:id="endCol" prefWidth="113.7" text="End" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
