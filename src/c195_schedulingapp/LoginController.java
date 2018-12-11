@@ -35,7 +35,7 @@ public class LoginController implements Initializable {
     
     @FXML public void login() throws ClassNotFoundException, SQLException, IOException{
         if(DB.loginAuth(username.getText(), password.getText())==true){
-            Parent root = FXMLLoader.load(getClass().getResource("Appointments.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Customers.fxml"));
             Scene scene = new Scene(root);
             appStage.setScene(scene);
             appStage.show();
