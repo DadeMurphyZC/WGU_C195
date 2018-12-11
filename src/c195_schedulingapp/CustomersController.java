@@ -6,8 +6,10 @@
 package c195_schedulingapp;
 
 import Model.Customer;
+import static c195_schedulingapp.C195_SchedulingApp.appStage;
 import static c195_schedulingapp.utils.DB.getCustomers;
 import c195_schedulingapp.utils.TableRow;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +20,10 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,7 +42,14 @@ public class CustomersController implements Initializable {
     @FXML private TableColumn<TableRow, String> addressCol;
     @FXML private TableColumn<TableRow, String> phoneCol;
     public static Customer selected;
-
+    
+    @FXML public void openAppointments() throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("Appointments.fxml"));
+        Scene scene = new Scene(root);
+        appStage.setScene(scene);
+        appStage.show();
+    }
+    
     /**
      * Initializes the controller class.
      */
