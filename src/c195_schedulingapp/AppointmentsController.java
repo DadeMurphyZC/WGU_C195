@@ -5,12 +5,14 @@
  */
 package c195_schedulingapp;
 
+import static c195_schedulingapp.C195_SchedulingApp.appStage;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import static c195_schedulingapp.C195_SchedulingApp.state;
 import c195_schedulingapp.utils.AppointmentRow;
 import static c195_schedulingapp.utils.DB.getAppointments;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -21,6 +23,10 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -31,26 +37,24 @@ import javafx.scene.control.TableView;
  */
 public class AppointmentsController implements Initializable {
     
-    @FXML
-    private TableColumn<AppointmentRow, String> idCol;
-    @FXML
-    private TableColumn<AppointmentRow, String> customerCol;
-    @FXML
-    private TableColumn<AppointmentRow, String> titleCol;
-    @FXML
-    private TableColumn<AppointmentRow, String> descriptionCol;
-    @FXML
-    private TableColumn<AppointmentRow, String> locationCol;
-    @FXML
-    private TableColumn<AppointmentRow, String> contactCol;
-    @FXML
-    private TableColumn<AppointmentRow, String> urlCol;
-    @FXML
-    private TableColumn<AppointmentRow, Time> startCol;
-    @FXML
-    private TableColumn<AppointmentRow, Time> endCol;
-    @FXML
-    private TableView appointmentsTable;
+    @FXML private TableColumn<AppointmentRow, String> idCol;
+    @FXML private TableColumn<AppointmentRow, String> customerCol;
+    @FXML private TableColumn<AppointmentRow, String> titleCol;
+    @FXML private TableColumn<AppointmentRow, String> descriptionCol;
+    @FXML private TableColumn<AppointmentRow, String> locationCol;
+    @FXML private TableColumn<AppointmentRow, String> contactCol;
+    @FXML private TableColumn<AppointmentRow, String> urlCol;
+    @FXML private TableColumn<AppointmentRow, Time> startCol;
+    @FXML private TableColumn<AppointmentRow, Time> endCol;
+    @FXML private TableView appointmentsTable;
+    @FXML private Button customersBtn;
+    
+    @FXML public void openCustomers() throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("Customers.fxml"));
+        Scene scene = new Scene(root);
+        appStage.setScene(scene);
+        appStage.show();
+    }
     
     /**
      * Initializes the controller class.
