@@ -11,7 +11,10 @@
    <children>
       <Pane prefHeight="60.0" prefWidth="1024.0" style="-fx-background-color: dimgray;">
          <children>
-            <Button layoutX="37.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Customers" textFill="WHITE" />
+            <Button fx:id="customersBtn" layoutX="37.0" layoutY="14.0" mnemonicParsing="false" onAction="#openCustomers" prefWidth="100.0" style="-fx-background-color: none;" text="Customers" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Button layoutX="137.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Appointments" textFill="WHITE" />
             <Button layoutX="237.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Calendar" textFill="WHITE" />
             <Button layoutX="337.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE" />
