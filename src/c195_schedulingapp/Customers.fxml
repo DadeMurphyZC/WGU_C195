@@ -6,8 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="c195_schedulingapp.CustomersController">
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c195_schedulingapp.CustomersController">
    <children>
       <Pane prefHeight="60.0" prefWidth="1024.0" style="-fx-background-color: dimgray;">
          <children>
@@ -17,5 +16,12 @@
             <Button layoutX="337.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE" />
          </children>
       </Pane>
+      <TableView fx:id="customerTable" layoutY="60.0" prefHeight="708.0" prefWidth="1024.0">
+        <columns>
+          <TableColumn fx:id="nameCol" prefWidth="342.0" text="Name" />
+          <TableColumn fx:id="addressCol" prefWidth="342.0" text="Address" />
+            <TableColumn fx:id="phoneCol" prefWidth="342.0" text="Phone" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>
