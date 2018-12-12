@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -19,12 +21,56 @@
             <Button layoutX="337.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE" />
          </children>
       </Pane>
-      <TableView fx:id="customerTable" layoutY="60.0" prefHeight="708.0" prefWidth="1024.0">
+      <TableView fx:id="customerTable" layoutY="102.0" prefHeight="666.0" prefWidth="1024.0">
         <columns>
           <TableColumn fx:id="nameCol" prefWidth="342.0" text="Name" />
           <TableColumn fx:id="addressCol" prefWidth="342.0" text="Address" />
             <TableColumn fx:id="phoneCol" prefWidth="342.0" text="Phone" />
         </columns>
       </TableView>
+      <Button alignment="TOP_LEFT" layoutX="258.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: none;" text="Add">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="396.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: none;" text="Edit">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="TOP_LEFT" layoutX="512.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: none;" text="Delete">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="47.0" layoutY="66.0" text="Customers">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="243.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/add.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="381.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/edit.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="497.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/delete.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
