@@ -5,7 +5,7 @@
  */
 package c195_schedulingapp.utils;
 
-import Model.Customer;
+import c195_schedulingapp.Model.Customer;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
