@@ -5,7 +5,7 @@
  */
 package c195_schedulingapp;
 
-import Model.Customer;
+import c195_schedulingapp.Model.Customer;
 import static c195_schedulingapp.C195_SchedulingApp.appStage;
 import static c195_schedulingapp.utils.DB.getCustomers;
 import c195_schedulingapp.utils.TableRow;
@@ -27,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -36,6 +37,7 @@ import javafx.scene.control.TableView;
 public class CustomersController implements Initializable {
     @FXML private Button createCustomerBtn;
     @FXML private Button editCustomerBtn;
+    @FXML private Button deleteCustomerBtn;
     @FXML private Button apptBtn;
     @FXML private TableView customerTable;
     @FXML private TableColumn<TableRow, String> nameCol;
@@ -48,6 +50,14 @@ public class CustomersController implements Initializable {
         Scene scene = new Scene(root);
         appStage.setScene(scene);
         appStage.show();
+    }
+    
+    @FXML public void createCustomer() throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("AddCustomer.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
     
     /**
