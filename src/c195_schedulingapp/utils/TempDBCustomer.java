@@ -5,8 +5,8 @@
  */
 package c195_schedulingapp.utils;
 
-import Model.Address;
-import Model.Customer;
+import c195_schedulingapp.Model.Address;
+import c195_schedulingapp.Model.Customer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
