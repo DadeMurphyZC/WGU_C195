@@ -5,8 +5,8 @@
  */
 package c195_schedulingapp.utils;
 
-import Model.Customer;
-import Model.User;
+import c195_schedulingapp.Model.Customer;
+import c195_schedulingapp.Model.User;
 import java.util.HashMap;
 
 /**
