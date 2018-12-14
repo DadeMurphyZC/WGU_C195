@@ -76,7 +76,8 @@ public class DB {
         pstmt = conn.prepareStatement(
                 "SELECT * from customer "
                 + "JOIN address "
-                + "ON customer.customerId = address.addressId ");
+                + "ON customer.customerId "
+                + "WHERE address.addressId = customer.addressId");
         rs = pstmt.executeQuery();
         return rs;
     }
