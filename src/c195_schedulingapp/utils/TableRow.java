@@ -21,6 +21,11 @@ public class TableRow {
         this.address = address;
         this.phone = phone;
     }
+
+    @Override
+    public String toString() {
+        return "TableRow{" + "customerName=" + customerName + '}';
+    }
     
     public ObservableValue<String> getcustomerName() {
         return customerName;
