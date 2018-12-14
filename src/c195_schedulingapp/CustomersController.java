@@ -45,6 +45,8 @@ public class CustomersController implements Initializable {
     @FXML private TableColumn<TableRow, String> phoneCol;
     public static Customer selected;
     
+    public static ObservableList<TableRow> customers = FXCollections.observableArrayList();
+    
     @FXML public void openAppointments() throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("Appointments.fxml"));
         Scene scene = new Scene(root);
@@ -65,8 +67,7 @@ public class CustomersController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try{
-            ObservableList<TableRow> customers = FXCollections.observableArrayList();
+        try{            
             ResultSet rs = getCustomers();
             nameCol.setCellValueFactory(cellData -> {return cellData.getValue().getcustomerName();});
             addressCol.setCellValueFactory(cellData -> {return cellData.getValue().getAddress();});
