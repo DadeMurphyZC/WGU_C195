@@ -5,6 +5,7 @@
  */
 package c195_schedulingapp;
 
+import static c195_schedulingapp.C195_SchedulingApp.state;
 import static c195_schedulingapp.CustomersController.customers;
 import c195_schedulingapp.Model.Address;
 import c195_schedulingapp.Model.Customer;
@@ -37,18 +38,18 @@ public class AddCustomerController implements Initializable {
     @FXML
     public synchronized void addCustomer() throws ClassNotFoundException, SQLException {
         //use TextField input to create a Customer object and add it to the db
-        Customer c = new Customer();
-        c.setCustomerName(name.getText());
-        c.setAddress(new Address(address.getText(),address2.getText(),1,postalCode.getText(),phone.getText()));
-        DB.addCustomerToDB(c);
-        c.setAddress1(c.getAddress().getAddress());
-        c.setPhone(c.getAddress().getPhone());
+        state.getTempCustomer().setCustomerName(name.getText());
+        state.getTempCustomer().setAddress(new Address(address.getText(),address2.getText(),1,postalCode.getText(),phone.getText()));
+        DB.addCustomerToDB(state.getTempCustomer());
+        state.getTempCustomer().setAddress1(state.getTempCustomer().getAddress().getAddress());
+        state.getTempCustomer().setPhone(state.getTempCustomer().getAddress().getPhone());
         TableRow tr = new TableRow(
-                            new ReadOnlyStringWrapper(c.getCustomerName()),
-                            new ReadOnlyStringWrapper(c.getAddress().getAddress()),
-                            new ReadOnlyStringWrapper(c.getPhone())
+                            new ReadOnlyStringWrapper(state.getTempCustomer().getCustomerName()),
+                            new ReadOnlyStringWrapper(state.getTempCustomer().getAddress().getAddress()),
+                            new ReadOnlyStringWrapper(state.getTempCustomer().getPhone())
                     );
         customers.add(tr);
+        state.clearTempCustomer();
     }
     
     /**
