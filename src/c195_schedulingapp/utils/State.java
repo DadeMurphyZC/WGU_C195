@@ -24,7 +24,7 @@ public class State<T> {
     public State() {
         this.setCurrentUser(null);
         this.setIsAuthed(null);
-        this.setTempCustomer(null);
+        this.setTempCustomer(new Customer());
         this.setTempIndex(null);
         state = new HashMap<>();
         state.put("currentUser", (T)currentUser);
@@ -78,7 +78,11 @@ public class State<T> {
     public void setTempIndex(Integer tempIndex) {
         this.tempIndex = tempIndex;
     }
-
+    
+    public void clearTempCustomer(){
+        this.tempCustomer = null;
+    }
+    
     @Override
     public String toString() {
         return "State: "+state;
