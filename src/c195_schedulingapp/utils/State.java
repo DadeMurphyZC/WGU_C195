@@ -6,7 +6,6 @@
 package c195_schedulingapp.utils;
 
 import c195_schedulingapp.Model.Customer;
-import c195_schedulingapp.Model.User;
 import java.util.HashMap;
 
 /**
@@ -16,18 +15,15 @@ import java.util.HashMap;
  */
 public class State<T> {
     private HashMap<String, T> state;
-    private User currentUser;
     private Customer tempCustomer;
     private Integer tempIndex;
     private Boolean isAuthed;
     
     public State() {
-        this.setCurrentUser(null);
         this.setIsAuthed(null);
         this.setTempCustomer(new Customer());
         this.setTempIndex(null);
         state = new HashMap<>();
-        state.put("currentUser", (T)currentUser);
         state.put("tempCustomer", (T)tempCustomer);
         state.put("tempIndex", (T)tempIndex);
         state.put("isAuthed", (T)isAuthed);
@@ -53,14 +49,6 @@ public class State<T> {
     public void addToState(String k, T v) {
         state.put(k, v);
         System.out.println("Key: "+k+ " and Value: "+v+" added to State.");
-    }
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
     }
 
     public Customer getTempCustomer() {
