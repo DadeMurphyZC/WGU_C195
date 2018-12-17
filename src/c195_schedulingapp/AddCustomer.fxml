@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="410.0" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="c195_schedulingapp.AddCustomerController">
+<AnchorPane id="AnchorPane" prefHeight="410.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c195_schedulingapp.AddCustomerController">
    <children>
       <SplitPane dividerPositions="0.1507537688442211" orientation="VERTICAL" prefHeight="410.0" prefWidth="350.0">
         <items>
@@ -45,7 +44,7 @@
                         <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                            <children>
                               <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#addCustomer" prefWidth="55.0" text="Save" />
-                              <Button fx:id="cancelBtn" mnemonicParsing="false" prefWidth="55.0" text="Cancel" />
+                              <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancel" prefWidth="55.0" text="Cancel" />
                            </children>
                            <padding>
                               <Insets top="7.0" />
