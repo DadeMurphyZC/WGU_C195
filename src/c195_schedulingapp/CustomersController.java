@@ -5,9 +5,9 @@
  */
 package c195_schedulingapp;
 
-import c195_schedulingapp.Model.Customer;
 import static c195_schedulingapp.C195_SchedulingApp.appStage;
 import static c195_schedulingapp.C195_SchedulingApp.state;
+import c195_schedulingapp.Model.Customer;
 import c195_schedulingapp.utils.DB;
 import static c195_schedulingapp.utils.DB.getCustomers;
 import c195_schedulingapp.utils.TableRow;
@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -64,12 +65,14 @@ public class CustomersController implements Initializable {
         stage.show();
     }
     
-    @FXML public void editCustomer() throws IOException, ClassNotFoundException, SQLException{
+    protected void loadCustomer() throws ClassNotFoundException, SQLException{
         state.clearTempCustomer();
         selected = (TableRow) customerTable.getSelectionModel().getSelectedItem();
-        System.out.println("selected: "+selected.getcustomerName());
         state.setTempCustomer(DB.searchCustomer(selected.getcustomerName().getValue()));
-        System.out.println("state temp: "+state.getTempCustomer().toString());
+    }
+    
+    @FXML public void editCustomer() throws IOException, ClassNotFoundException, SQLException{
+        loadCustomer();
         Parent root = FXMLLoader.load(getClass().getResource("EditCustomer.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
