@@ -9,7 +9,6 @@ import static c195_schedulingapp.C195_SchedulingApp.appStage;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
-import static c195_schedulingapp.C195_SchedulingApp.state;
 import c195_schedulingapp.utils.AppointmentRow;
 import static c195_schedulingapp.utils.DB.getAppointments;
 import java.io.IOException;
@@ -61,7 +60,6 @@ public class AppointmentsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.print(state);
         try{
             ObservableList<AppointmentRow> appointments = FXCollections.observableArrayList();
             ResultSet rs = getAppointments();
