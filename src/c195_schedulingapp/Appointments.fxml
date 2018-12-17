@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -11,18 +12,18 @@
    <children>
       <Pane prefHeight="60.0" prefWidth="1024.0" style="-fx-background-color: dimgray;">
          <children>
+            <Button layoutX="137.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Appointments" textFill="WHITE" />
+            <Button layoutX="237.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Calendar" textFill="WHITE" />
+            <Button layoutX="337.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE" />
             <Button fx:id="customersBtn" layoutX="37.0" layoutY="14.0" mnemonicParsing="false" onAction="#openCustomers" prefWidth="100.0" style="-fx-background-color: none;" text="Customers" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button layoutX="137.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Appointments" textFill="WHITE" />
-            <Button layoutX="237.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Calendar" textFill="WHITE" />
-            <Button layoutX="337.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE" />
          </children>
       </Pane>
-      <Pane layoutY="60.0" prefHeight="710.0" prefWidth="1024.0">
+      <Pane prefHeight="768.0" prefWidth="1024.0">
          <children>
-            <TableView fx:id="appointmentsTable" prefHeight="678.0" prefWidth="1024.0">
+            <TableView fx:id="appointmentsTable" layoutY="102.0" prefHeight="666.0" prefWidth="1024.0">
               <columns>
                 <TableColumn fx:id="idCol" prefWidth="113.7" text="ID" />
                 <TableColumn fx:id="customerCol" prefWidth="113.7" text="Customer" />
@@ -37,5 +38,49 @@
             </TableView>
          </children>
       </Pane>
+      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="497.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/delete.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="381.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/edit.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="243.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/add.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="47.0" layoutY="66.0" text="Appointments">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button alignment="TOP_LEFT" layoutX="512.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: none;" text="Delete">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="396.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: none;" text="Edit">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button alignment="TOP_LEFT" layoutX="258.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: none;" text="Add">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
