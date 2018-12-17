@@ -22,6 +22,9 @@ public class TableRow {
         this.phone = phone;
     }
 
+    public TableRow() {
+    }
+
     @Override
     public String toString() {
         return "TableRow{" + "customerName=" + customerName + '}';
