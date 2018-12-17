@@ -60,7 +60,7 @@ public class DB {
         pstmt = conn.prepareStatement(
                 "SELECT * FROM customer "
                 + "JOIN address "
-                + "ON customer.customerId = address.addressId "
+                + "ON customer.customerId "
                 + "WHERE customer.customerName = ?");
         pstmt.setString(1, name);
         rs = pstmt.executeQuery();
