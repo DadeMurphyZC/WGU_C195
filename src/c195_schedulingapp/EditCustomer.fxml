@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="410.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c195_schedulingapp.EditCustomerController">
+   <children>
+      <SplitPane dividerPositions="0.1507537688442211" orientation="VERTICAL" prefHeight="410.0" prefWidth="350.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: dimgray;" SplitPane.resizableWithParent="false">
+               <children>
+                  <Label layoutX="21.0" layoutY="15.0" text="Edit Customer" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="335.0" prefWidth="586.0">
+               <children>
+                  <VBox layoutX="-1.0" prefHeight="335.0" prefWidth="350.0" spacing="5.0">
+                     <children>
+                        <Label text="Name" />
+                        <TextField fx:id="name" />
+                        <Label text="Address" />
+                        <TextField fx:id="address" />
+                        <Label text="Address 2" />
+                        <TextField fx:id="address2" />
+                        <MenuButton mnemonicParsing="false" text="City">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                        </MenuButton>
+                        <Label text="Postal Code" />
+                        <TextField fx:id="postalCode" />
+                        <Label text="Phone" />
+                        <TextField fx:id="phone" />
+                        <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <Button fx:id="saveBtn" mnemonicParsing="false" prefWidth="55.0" text="Save" />
+                              <Button fx:id="cancelBtn" mnemonicParsing="false" prefWidth="55.0" text="Cancel" />
+                           </children>
+                           <padding>
+                              <Insets top="7.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="15.0" right="15.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
