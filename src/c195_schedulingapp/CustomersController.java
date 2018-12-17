@@ -7,6 +7,8 @@ package c195_schedulingapp;
 
 import c195_schedulingapp.Model.Customer;
 import static c195_schedulingapp.C195_SchedulingApp.appStage;
+import static c195_schedulingapp.C195_SchedulingApp.state;
+import c195_schedulingapp.utils.DB;
 import static c195_schedulingapp.utils.DB.getCustomers;
 import c195_schedulingapp.utils.TableRow;
 import java.io.IOException;
@@ -43,7 +45,7 @@ public class CustomersController implements Initializable {
     @FXML private TableColumn<TableRow, String> nameCol;
     @FXML private TableColumn<TableRow, String> addressCol;
     @FXML private TableColumn<TableRow, String> phoneCol;
-    public static Customer selected;
+    public static TableRow selected = new TableRow();
     
     public static ObservableList<TableRow> customers = FXCollections.observableArrayList();
     
@@ -62,11 +64,25 @@ public class CustomersController implements Initializable {
         stage.show();
     }
     
+    @FXML public void editCustomer() throws IOException, ClassNotFoundException, SQLException{
+        state.clearTempCustomer();
+        selected = (TableRow) customerTable.getSelectionModel().getSelectedItem();
+        System.out.println("selected: "+selected.getcustomerName());
+        state.setTempCustomer(DB.searchCustomer(selected.getcustomerName().getValue()));
+        System.out.println("state temp: "+state.getTempCustomer().toString());
+        Parent root = FXMLLoader.load(getClass().getResource("EditCustomer.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        customers.clear();
         try{            
             ResultSet rs = getCustomers();
             nameCol.setCellValueFactory(cellData -> {return cellData.getValue().getcustomerName();});
@@ -91,6 +107,6 @@ public class CustomersController implements Initializable {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CustomersController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
+    }
     
 }
