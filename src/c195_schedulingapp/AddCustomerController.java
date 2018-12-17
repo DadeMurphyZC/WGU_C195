@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import c195_schedulingapp.utils.TableRow;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -50,6 +51,14 @@ public class AddCustomerController implements Initializable {
                     );
         customers.add(tr);
         state.clearTempCustomer();
+        Stage stage = (Stage) saveBtn.getScene().getWindow();
+        stage.close();
+    }
+    
+    @FXML
+    public void cancel(){
+        Stage stage = (Stage) cancelBtn.getScene().getWindow();
+        stage.close();
     }
     
     /**
