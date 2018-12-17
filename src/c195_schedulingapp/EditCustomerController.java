@@ -6,12 +6,16 @@
 package c195_schedulingapp;
 
 import static c195_schedulingapp.C195_SchedulingApp.state;
+import c195_schedulingapp.Model.Address;
+import static c195_schedulingapp.utils.DB.updateCustomer;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -28,6 +32,19 @@ public class EditCustomerController implements Initializable {
     @FXML private TextField postalCode;
     @FXML private TextField phone;
     
+    @FXML public synchronized void editCustomer() throws ClassNotFoundException, SQLException{
+        state.getTempCustomer().setAddress(new Address(address.getText(),address2.getText(),1,postalCode.getText(),phone.getText()));
+        updateCustomer(state.getTempCustomer().getCustomerName(), name.getText());
+        state.clearTempCustomer();
+        Stage stage = (Stage) saveBtn.getScene().getWindow();
+        stage.close();
+    }
+    
+    @FXML public void cancel(){
+        Stage stage = (Stage) saveBtn.getScene().getWindow();
+        stage.close();
+    }
+    
     
     /**
      * Initializes the controller class.
@@ -39,8 +56,6 @@ public class EditCustomerController implements Initializable {
         address2.setText(state.getTempCustomer().getAddress().getAddress2());
         postalCode.setText(state.getTempCustomer().getAddress().getPostalCode());
         phone.setText(state.getTempCustomer().getPhone());
-        
-        
     }    
     
 }
