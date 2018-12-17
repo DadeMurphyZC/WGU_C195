@@ -43,8 +43,8 @@
                         <TextField fx:id="phone" />
                         <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                            <children>
-                              <Button fx:id="saveBtn" mnemonicParsing="false" prefWidth="55.0" text="Save" />
-                              <Button fx:id="cancelBtn" mnemonicParsing="false" prefWidth="55.0" text="Cancel" />
+                              <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#editCustomer" prefWidth="55.0" text="Save" />
+                              <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancel" prefWidth="55.0" text="Cancel" />
                            </children>
                            <padding>
                               <Insets top="7.0" />
