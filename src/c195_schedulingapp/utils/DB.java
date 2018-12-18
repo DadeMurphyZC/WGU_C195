@@ -61,7 +61,8 @@ public class DB {
                 "SELECT * FROM customer "
                 + "JOIN address "
                 + "ON customer.customerId "
-                + "WHERE customer.customerName = ?");
+                + "WHERE customer.customerName = ?"
+                + "AND address.addressId = customer.addressId");
         pstmt.setString(1, name);
         rs = pstmt.executeQuery();
         Customer temp = null;
