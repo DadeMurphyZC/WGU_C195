@@ -6,6 +6,8 @@
 package c195_schedulingapp.utils;
 
 import c195_schedulingapp.Model.Customer;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
 
 /**
@@ -18,17 +20,36 @@ public class State<T> {
     private Customer tempCustomer;
     private Integer tempIndex;
     private Boolean isAuthed;
+    private Boolean needsRefresh;
+    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+
     
     public State() {
         this.setIsAuthed(null);
         this.setTempCustomer(new Customer());
         this.setTempIndex(null);
+        this.setNeedsRefresh(false);
         state = new HashMap<>();
         state.put("tempCustomer", (T)tempCustomer);
         state.put("tempIndex", (T)tempIndex);
         state.put("isAuthed", (T)isAuthed);
+        state.put("needsRefresh", (T)needsRefresh);
     };
-
+    
+   public void addPropertyChangeListener(PropertyChangeListener listener){
+       this.pcs.addPropertyChangeListener(listener);
+   }
+   
+   public void removePropertyChangeListener(PropertyChangeListener listener){
+       this.pcs.removePropertyChangeListener(listener);
+   }
+   
+   public void setListenValue(Boolean newValue){
+       Boolean oldValue = this.needsRefresh;
+       this.needsRefresh = newValue;
+       this.pcs.firePropertyChange("needsRefresh", oldValue, newValue);
+   }
+    
     public Boolean getIsAuthed() {
         return isAuthed;
     }
@@ -66,9 +87,21 @@ public class State<T> {
     public void setTempIndex(Integer tempIndex) {
         this.tempIndex = tempIndex;
     }
+
+    public Boolean getNeedsRefresh() {
+        return needsRefresh;
+    }
+
+    public void setNeedsRefresh(Boolean needsRefresh) {
+        this.needsRefresh = needsRefresh;
+    }
     
     public void clearTempCustomer(){
         this.tempCustomer = null;
+    }
+    
+    public void clearTempIndex(){
+        this.tempIndex = null;
     }
     
     @Override
