@@ -49,18 +49,22 @@
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox fx:id="startTime" prefWidth="150.0">
+                              <ComboBox fx:id="startTime" minHeight="25.0" prefHeight="25.0" prefWidth="150.0">
                                  <HBox.margin>
                                     <Insets right="20.0" />
                                  </HBox.margin>
-                              </ChoiceBox>
-                              <ChoiceBox fx:id="endTime" prefWidth="150.0" />
+                              </ComboBox>
+                              <ComboBox fx:id="endTime" minHeight="25.0" prefHeight="25.0" prefWidth="150.0">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </ComboBox>
                            </children>
                         </HBox>
                         <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                            <children>
-                              <Button fx:id="save" mnemonicParsing="false" onAction="#addCustomer" prefWidth="55.0" text="Save" />
-                              <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancel" prefWidth="55.0" text="Cancel" />
+                              <Button fx:id="save" mnemonicParsing="false" prefWidth="55.0" text="Save" />
+                              <Button fx:id="cancel" mnemonicParsing="false" prefWidth="55.0" text="Cancel" />
                            </children>
                            <padding>
                               <Insets top="7.0" />
