@@ -8,9 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="410.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c195_schedulingapp.AddCustomerController">
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c195_schedulingapp.AddCustomerController">
    <children>
-      <SplitPane dividerPositions="0.1507537688442211" orientation="VERTICAL" prefHeight="410.0" prefWidth="350.0">
+      <SplitPane dividerPositions="0.1507537688442211" orientation="VERTICAL" prefHeight="440.0" prefWidth="350.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: dimgray;" SplitPane.resizableWithParent="false">
                <children>
@@ -31,12 +31,8 @@
                         <TextField fx:id="address" />
                         <Label text="Address 2" />
                         <TextField fx:id="address2" />
-                        <MenuButton mnemonicParsing="false" text="City">
-                          <items>
-                            <MenuItem mnemonicParsing="false" text="Action 1" />
-                            <MenuItem mnemonicParsing="false" text="Action 2" />
-                          </items>
-                        </MenuButton>
+                        <Label text="City" />
+                        <ComboBox fx:id="city" prefWidth="150.0" promptText="City" />
                         <Label text="Postal Code" />
                         <TextField fx:id="postalCode" />
                         <Label text="Phone" />
