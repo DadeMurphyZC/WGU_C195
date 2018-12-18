@@ -6,11 +6,15 @@
 package c195_schedulingapp;
 
 import static c195_schedulingapp.C195_SchedulingApp.state;
+import static c195_schedulingapp.CustomersController.customers;
 import c195_schedulingapp.Model.Address;
 import static c195_schedulingapp.utils.DB.updateCustomer;
+import c195_schedulingapp.utils.TableRow;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -35,7 +39,14 @@ public class EditCustomerController implements Initializable {
     @FXML public synchronized void editCustomer() throws ClassNotFoundException, SQLException{
         state.getTempCustomer().setAddress(new Address(address.getText(),address2.getText(),1,postalCode.getText(),phone.getText()));
         updateCustomer(state.getTempCustomer().getCustomerName(), name.getText());
+        TableRow tr = new TableRow(
+                            new SimpleStringProperty(name.getText()),
+                            new SimpleStringProperty(address.getText()),
+                            new SimpleStringProperty(phone.getText())
+                    );
+        customers.set(state.getTempIndex(), tr);
         state.clearTempCustomer();
+        state.clearTempIndex();
         Stage stage = (Stage) saveBtn.getScene().getWindow();
         stage.close();
     }
