@@ -7,6 +7,8 @@ package c195_schedulingapp;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -30,12 +32,18 @@ public class AddAppointmentController implements Initializable {
     @FXML private ComboBox endTime;
     @FXML private Button save;
     @FXML private Button cancel;
-    
+
+    ObservableList<String> customerOptions = FXCollections.observableArrayList(
+            "Customer 1",
+            "Customer 2",
+            "Customer 3"
+    );
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        customer.setItems(customerOptions);
         
     }    
     
