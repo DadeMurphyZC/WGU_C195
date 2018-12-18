@@ -7,6 +7,7 @@ package c195_schedulingapp;
 
 import static c195_schedulingapp.C195_SchedulingApp.appStage;
 import static c195_schedulingapp.C195_SchedulingApp.state;
+import static c195_schedulingapp.CustomersController.customers;
 import c195_schedulingapp.utils.DB;
 import static c195_schedulingapp.utils.DB.getCustomers;
 import c195_schedulingapp.utils.TableRow;
@@ -19,6 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,7 +48,7 @@ public class CustomersController implements Initializable {
     @FXML private TableColumn<TableRow, String> addressCol;
     @FXML private TableColumn<TableRow, String> phoneCol;
     public static TableRow selected = new TableRow();
-    
+
     public static ObservableList<TableRow> customers = FXCollections.observableArrayList();
     
     @FXML public void openAppointments() throws IOException{
@@ -65,12 +68,15 @@ public class CustomersController implements Initializable {
     
     protected void loadCustomer() throws ClassNotFoundException, SQLException{
         state.clearTempCustomer();
+        state.clearTempIndex();
         selected = (TableRow) customerTable.getSelectionModel().getSelectedItem();
+        System.out.println("Selected: "+selected.getcustomerName());
         state.setTempCustomer(DB.searchCustomer(selected.getcustomerName().getValue()));
     }
     
     @FXML public void editCustomer() throws IOException, ClassNotFoundException, SQLException{
         loadCustomer();
+        state.setTempIndex(customerTable.getSelectionModel().getSelectedIndex());
         Parent root = FXMLLoader.load(getClass().getResource("EditCustomer.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
@@ -83,7 +89,7 @@ public class CustomersController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        customers.clear();
+        customers.clear();     
         try{            
             ResultSet rs = getCustomers();
             nameCol.setCellValueFactory(cellData -> {return cellData.getValue().getcustomerName();});
