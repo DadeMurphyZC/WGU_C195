@@ -28,6 +28,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -53,6 +54,14 @@ public class AppointmentsController implements Initializable {
         Scene scene = new Scene(root);
         appStage.setScene(scene);
         appStage.show();
+    }
+    
+    @FXML public void addAppointment() throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("AddAppointment.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
     
     /**
