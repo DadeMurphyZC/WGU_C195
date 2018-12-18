@@ -19,6 +19,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import c195_schedulingapp.utils.TableRow;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 /**
@@ -35,6 +39,14 @@ public class AddCustomerController implements Initializable {
     @FXML private TextField address2;
     @FXML private TextField postalCode;
     @FXML private TextField phone;
+    @FXML private ComboBox city;
+    
+    ObservableList<String> options = 
+    FXCollections.observableArrayList(
+        "Bakersfield",
+        "Houston",
+        "New York"
+    );
     
     @FXML
     public synchronized void addCustomer() throws ClassNotFoundException, SQLException {
@@ -42,12 +54,10 @@ public class AddCustomerController implements Initializable {
         state.getTempCustomer().setCustomerName(name.getText());
         state.getTempCustomer().setAddress(new Address(address.getText(),address2.getText(),1,postalCode.getText(),phone.getText()));
         DB.addCustomerToDB(state.getTempCustomer());
-        state.getTempCustomer().setAddress1(state.getTempCustomer().getAddress().getAddress());
-        state.getTempCustomer().setPhone(state.getTempCustomer().getAddress().getPhone());
         TableRow tr = new TableRow(
-                            new ReadOnlyStringWrapper(state.getTempCustomer().getCustomerName()),
-                            new ReadOnlyStringWrapper(state.getTempCustomer().getAddress().getAddress()),
-                            new ReadOnlyStringWrapper(state.getTempCustomer().getPhone())
+                            new SimpleStringProperty(state.getTempCustomer().getCustomerName()),
+                            new SimpleStringProperty(state.getTempCustomer().getAddress().getAddress()),
+                            new SimpleStringProperty(state.getTempCustomer().getAddress().getPhone())
                     );
         customers.add(tr);
         state.clearTempCustomer();
@@ -66,7 +76,7 @@ public class AddCustomerController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        city.getItems().addAll(options);
     }    
     
 }
