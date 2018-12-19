@@ -47,7 +47,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="deleteCustomerBtn" alignment="TOP_LEFT" layoutX="512.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: none;" text="Delete">
+      <Button fx:id="deleteCustomerBtn" alignment="TOP_LEFT" layoutX="512.0" layoutY="60.0" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: none;" text="Delete">
          <font>
             <Font size="18.0" />
          </font>
