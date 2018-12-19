@@ -84,6 +84,16 @@ public class CustomersController implements Initializable {
         stage.show();
     }
     
+    @FXML public void deleteCustomer() throws ClassNotFoundException, SQLException{
+        state.clearTempCustomer();
+        selected = (TableRow) customerTable.getSelectionModel().getSelectedItem();
+        DB.deleteCustomer(selected.getcustomerName().getValue());
+        state.setTempIndex(customerTable.getSelectionModel().getSelectedIndex());
+        customers.remove(state.getTempIndex().intValue());
+        state.clearTempCustomer();
+        state.clearTempIndex();
+    }
+    
     /**
      * Initializes the controller class.
      */
