@@ -83,6 +83,15 @@ public class DB {
         return rs;
     }
     
+    public static void deleteCustomer(String name) throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "DELETE from customer "
+                + "WHERE customer.customerName = ?");
+        pstmt.setString(1, name);
+        pstmt.execute();
+    }
+    
     public static ResultSet getAppointments() throws SQLException, ClassNotFoundException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
