@@ -10,6 +10,7 @@ import static c195_schedulingapp.CustomersController.customers;
 import c195_schedulingapp.Model.Address;
 import c195_schedulingapp.Model.Customer;
 import c195_schedulingapp.utils.DB;
+import static c195_schedulingapp.utils.DB.getCities;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -18,6 +19,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import c195_schedulingapp.utils.TableRow;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -40,13 +46,8 @@ public class AddCustomerController implements Initializable {
     @FXML private TextField postalCode;
     @FXML private TextField phone;
     @FXML private ComboBox city;
-    
-    ObservableList<String> options = 
-    FXCollections.observableArrayList(
-        "Bakersfield",
-        "Houston",
-        "New York"
-    );
+
+    HashMap options = new HashMap();
     
     @FXML
     public synchronized void addCustomer() throws ClassNotFoundException, SQLException {
@@ -76,7 +77,10 @@ public class AddCustomerController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        city.getItems().addAll(options);
+        city.getItems().clear();
+        try {options = getCities();} 
+        catch (ClassNotFoundException | SQLException ex) {System.out.println(ex);}
+        options.forEach((k,v)->city.getItems().add(v));
     }    
     
 }
