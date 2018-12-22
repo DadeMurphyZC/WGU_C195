@@ -16,6 +16,8 @@ import java.sql.Statement;
 import javafx.stage.Stage;
 import static c195_schedulingapp.utils.TempDBCustomer.tempCustomer;
 import static c195_schedulingapp.C195_SchedulingApp.state;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -81,6 +83,14 @@ public class DB {
                 + "WHERE address.addressId = customer.addressId");
         rs = pstmt.executeQuery();
         return rs;
+    }
+    
+    public static ArrayList getCustomersArray() throws ClassNotFoundException, SQLException{
+        ArrayList customers = new ArrayList();
+        conn = dbConnect();
+        rs = conn.prepareStatement("SELECT customerName FROM customer").executeQuery();
+        while(rs.next()){customers.add(rs.getString("customerName"));}
+        return customers;
     }
     
     public static void deleteCustomer(String name) throws ClassNotFoundException, SQLException{
@@ -159,5 +169,33 @@ public class DB {
             rs.updateRow();
         }
         if(pstmt!=null){pstmt.close();}
+    }
+    
+    public static HashMap getCities() throws ClassNotFoundException, SQLException{
+        HashMap dbCities = new HashMap();
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "SELECT cityid, city "
+                + "FROM city"
+        );
+        rs = pstmt.executeQuery();
+        while(rs.next()){
+            dbCities.put(rs.getString("cityid"), rs.getString("city"));
+        }
+        return dbCities;
+    }
+    
+    public static HashMap getUsers() throws ClassNotFoundException, SQLException{
+        HashMap dbUsers = new HashMap();
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "SELECT userid, userName "
+              + "FROM user"
+        );
+        rs = pstmt.executeQuery();
+        while(rs.next()){
+            dbUsers.put(rs.getInt("userid"), rs.getString("userName"));
+        }
+        return dbUsers;
     }
 }
