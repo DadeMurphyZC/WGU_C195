@@ -118,12 +118,11 @@ public class CustomersController implements Initializable {
                     customers.add(tr);
                 }
                 customerTable.setItems(customers);
-            } catch (SQLException ex) {
-                Logger.getLogger(CustomersController.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            catch (SQLException ex) {
+                System.out.println("Ex: "+ex);
             }
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(CustomersController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+        } 
+        catch (ClassNotFoundException | SQLException ex) {System.out.println("Ex: "+ex);} 
+    } 
 }
