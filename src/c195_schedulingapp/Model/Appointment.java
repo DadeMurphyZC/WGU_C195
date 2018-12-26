@@ -33,6 +33,8 @@ public class Appointment {
         this.start = start;
         this.end = end;
     }
+    
+    public Appointment(){};
 
     public int getAppointmentId() {
         return appointmentId;
