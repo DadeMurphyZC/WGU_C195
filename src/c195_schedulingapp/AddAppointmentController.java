@@ -5,6 +5,7 @@
  */
 package c195_schedulingapp;
 
+import c195_schedulingapp.Model.Appointment;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -15,14 +16,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import static c195_schedulingapp.utils.DB.*;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.ObservableList;
 /**
  * FXML Controller class
  *
@@ -45,7 +46,7 @@ public class AddAppointmentController implements Initializable {
     private ArrayList customerOptions = new ArrayList();
     private ArrayList descriptionOptions = new ArrayList();
     private HashMap locationOptions = new HashMap();
-    private ArrayList times = new ArrayList();
+    private ArrayList<LocalTime> times = new ArrayList<>();
     
     //populates available times
     private ArrayList generateHours(){
@@ -72,8 +73,25 @@ public class AddAppointmentController implements Initializable {
         generateHours().forEach((t)->endTime.getItems().add(t));
     }
     
+    @FXML void testAdd() throws ParseException{
+        LocalDate dateValue = date.getValue();
+        LocalDateTime ldtTest = LocalDateTime.of(dateValue, LocalTime.parse(startTime.getValue().toString()));
+        LocalDateTime ldt = LocalDateTime.of(date.getValue(), LocalTime.of(Integer.parseInt(startTime.getValue().toString().substring(0, 2)),0));
+        System.out.println("Start Time: "+ldtTest);
+        System.out.println(contact.getSelectionModel().getSelectedItem());
+        System.out.println(customer.getSelectionModel().getSelectedItem());
+        System.out.println(description.getSelectionModel().getSelectedItem());
+        System.out.println(location.getSelectionModel().getSelectedItem());
+        System.out.println(startTime.getSelectionModel().getSelectedItem());
+        System.out.println(endTime.getSelectionModel().getSelectedItem());
+        System.out.println(title.getText());
+        System.out.println(date.getValue());
+    }
+    
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
