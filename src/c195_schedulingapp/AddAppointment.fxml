@@ -63,7 +63,7 @@
                         </HBox>
                         <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                            <children>
-                              <Button fx:id="save" mnemonicParsing="false" prefWidth="55.0" text="Save" />
+                              <Button fx:id="save" mnemonicParsing="false" onAction="#testAdd" prefWidth="55.0" text="Save" />
                               <Button fx:id="cancel" mnemonicParsing="false" prefWidth="55.0" text="Cancel" />
                            </children>
                            <padding>
