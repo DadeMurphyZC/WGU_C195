@@ -39,6 +39,8 @@
                         <TextField fx:id="username" style="-fx-border-radius: 0;" />
                         <Label text="Password" />
                         <PasswordField fx:id="password" />
+                        <Label text="Location" />
+                        <ComboBox fx:id="location" prefWidth="150.0" />
                         <Button fx:id="loginBtn" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#login" text="Login" translateX="295.0">
                            <VBox.margin>
                               <Insets top="10.0" />
