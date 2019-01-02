@@ -21,7 +21,7 @@ public class State<T> {
     private Integer tempIndex;
     private Boolean isAuthed;
     private Boolean needsRefresh;
-    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    private String location;
 
     
     public State() {
@@ -29,26 +29,14 @@ public class State<T> {
         this.setTempCustomer(new Customer());
         this.setTempIndex(null);
         this.setNeedsRefresh(false);
+        this.setLocation(null);
         state = new HashMap<>();
         state.put("tempCustomer", (T)tempCustomer);
         state.put("tempIndex", (T)tempIndex);
         state.put("isAuthed", (T)isAuthed);
         state.put("needsRefresh", (T)needsRefresh);
+        state.put("location", (T)location);
     };
-    
-   public void addPropertyChangeListener(PropertyChangeListener listener){
-       this.pcs.addPropertyChangeListener(listener);
-   }
-   
-   public void removePropertyChangeListener(PropertyChangeListener listener){
-       this.pcs.removePropertyChangeListener(listener);
-   }
-   
-   public void setListenValue(Boolean newValue){
-       Boolean oldValue = this.needsRefresh;
-       this.needsRefresh = newValue;
-       this.pcs.firePropertyChange("needsRefresh", oldValue, newValue);
-   }
     
     public Boolean getIsAuthed() {
         return isAuthed;
@@ -103,7 +91,15 @@ public class State<T> {
     public void clearTempIndex(){
         this.tempIndex = null;
     }
-    
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     @Override
     public String toString() {
         return "State: "+state;
