@@ -16,14 +16,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import static c195_schedulingapp.utils.DB.*;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 /**
  * FXML Controller class
  *
@@ -69,23 +71,39 @@ public class AddAppointmentController implements Initializable {
         customerOptions.forEach((c)->customer.getItems().add(c));
         descriptionOptions.forEach((d)->description.getItems().add(d));
         locationOptions.forEach((k,v)->location.getItems().add(v));
-        generateHours().forEach((t)->startTime.getItems().add(t));
+        generateHours().forEach((t)->startTime.getItems().add((LocalTime)t));
         generateHours().forEach((t)->endTime.getItems().add(t));
     }
     
     @FXML void testAdd() throws ParseException{
-        LocalDate dateValue = date.getValue();
-        LocalDateTime ldtTest = LocalDateTime.of(dateValue, LocalTime.parse(startTime.getValue().toString()));
-        LocalDateTime ldt = LocalDateTime.of(date.getValue(), LocalTime.of(Integer.parseInt(startTime.getValue().toString().substring(0, 2)),0));
-        System.out.println("Start Time: "+ldtTest);
-        System.out.println(contact.getSelectionModel().getSelectedItem());
-        System.out.println(customer.getSelectionModel().getSelectedItem());
-        System.out.println(description.getSelectionModel().getSelectedItem());
-        System.out.println(location.getSelectionModel().getSelectedItem());
-        System.out.println(startTime.getSelectionModel().getSelectedItem());
-        System.out.println(endTime.getSelectionModel().getSelectedItem());
-        System.out.println(title.getText());
-        System.out.println(date.getValue());
+        LocalDateTime start = LocalDateTime.of(date.getValue(), LocalTime.parse(startTime.getValue().toString()));
+        String startFormatted = DateTimeFormatter
+                        .ofPattern("yyyy-MM-dd HH:mm:ss")
+                        .toFormat()
+                        .format(start);
+        
+        LocalDateTime end = LocalDateTime.of(date.getValue(), LocalTime.parse(endTime.getValue().toString()));
+        String endFormatted = DateTimeFormatter
+                        .ofPattern("yyyy-MM-dd HH:mm:ss")
+                        .toFormat()
+                        .format(end);
+        
+        System.out.println("Customer: "+customer.getSelectionModel().getSelectedItem());
+        System.out.println("Title: "+title.getText());
+        System.out.println("Description: "+description.getSelectionModel().getSelectedItem());
+        System.out.println("Location: "+location.getSelectionModel().getSelectedItem());
+        System.out.println("Contact: "+contact.getSelectionModel().getSelectedItem());
+        System.out.println("Start: "+startFormatted);
+        System.out.println("End: "+endFormatted);
+    }
+    
+    @FXML void testPrint(){
+        LocalDateTime dt = LocalDateTime.of(date.getValue(), LocalTime.parse(startTime.getValue().toString()));
+        String fdt = DateTimeFormatter
+                        .ofPattern("yyyy-MM-dd HH:mm:ss")
+                        .toFormat()
+                        .format(dt);
+        System.out.println(fdt);
     }
     
     /**
