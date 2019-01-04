@@ -18,7 +18,10 @@
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
             <Button layoutX="237.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Calendar" textFill="WHITE" />
-            <Button layoutX="337.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE" />
+            <Button layoutX="337.0" layoutY="14.0" mnemonicParsing="false" onAction="#openReports" prefWidth="100.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
          </children>
       </Pane>
       <TableView fx:id="customerTable" layoutY="102.0" prefHeight="666.0" prefWidth="1024.0">
