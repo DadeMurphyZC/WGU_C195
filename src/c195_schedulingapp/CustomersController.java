@@ -58,6 +58,13 @@ public class CustomersController implements Initializable {
         appStage.show();
     }
     
+    @FXML public void openReports() throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("Reports.fxml"));
+        Scene scene = new Scene(root);
+        appStage.setScene(scene);
+        appStage.show();
+    }
+    
     @FXML public void createCustomer() throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("AddCustomer.fxml"));
         Scene scene = new Scene(root);
