@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="c195_schedulingapp.ReportsController">
+<AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c195_schedulingapp.ReportsController">
    <children>
       <Pane prefHeight="60.0" prefWidth="1024.0" style="-fx-background-color: dimgray;">
          <children>
@@ -17,5 +17,20 @@
             <Button layoutX="337.0" layoutY="14.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE" />
          </children>
       </Pane>
+      <Label layoutX="47.0" layoutY="66.0" text="Reports">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TableView layoutY="102.0" prefHeight="666.0" prefWidth="1024.0">
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+         <columns>
+            <TableColumn prefWidth="342.0" />
+         </columns>
+      </TableView>
+      <ComboBox layoutX="162.0" layoutY="67.0" prefHeight="25.0" prefWidth="338.0" />
+      <Button layoutX="512.0" layoutY="67.0" mnemonicParsing="false" text="Generate Report" />
    </children>
 </AnchorPane>
