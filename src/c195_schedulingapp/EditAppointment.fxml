@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="160.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="c195_schedulingapp.EditAppointmentController">
+   <children>
+      <SplitPane dividerPositions="0.1507537688442211" orientation="VERTICAL" prefHeight="500.0" prefWidth="350.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: dimgray;" SplitPane.resizableWithParent="false">
+               <children>
+                  <Label layoutX="21.0" layoutY="15.0" text="Edit Appointment" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="335.0" prefWidth="586.0">
+               <children>
+                  <VBox layoutX="-1.0" prefHeight="335.0" prefWidth="350.0" spacing="5.0">
+                     <children>
+                        <Label text="Customer" />
+                        <ComboBox fx:id="customer" prefWidth="150.0" promptText="Customer" />
+                        <Label text="Title" />
+                        <TextField fx:id="title" />
+                        <Label text="Description" />
+                        <ComboBox fx:id="description" prefWidth="150.0" promptText="Description" />
+                        <Label text="Location" />
+                        <ComboBox fx:id="location" prefWidth="150.0" promptText="City" />
+                        <Label text="Contact" />
+                        <ComboBox fx:id="contact" prefWidth="150.0" promptText="Contact" />
+                        <Label text="Date" />
+                        <DatePicker fx:id="date" />
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Start Time">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                              <Label text="End Time" translateX="115.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ComboBox fx:id="startTime" minHeight="25.0" prefHeight="25.0" prefWidth="150.0">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                              <ComboBox fx:id="endTime" minHeight="25.0" prefHeight="25.0" prefWidth="150.0">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <Button fx:id="save" mnemonicParsing="false" onAction="#testAdd" prefWidth="55.0" text="Save" />
+                              <Button fx:id="cancel" mnemonicParsing="false" prefWidth="55.0" text="Cancel" />
+                           </children>
+                           <padding>
+                              <Insets top="7.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="15.0" right="15.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
