@@ -16,6 +16,8 @@ import java.sql.Statement;
 import javafx.stage.Stage;
 import static c195_schedulingapp.utils.TempDBCustomer.tempCustomer;
 import static c195_schedulingapp.C195_SchedulingApp.state;
+import c195_schedulingapp.Model.Appointment;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -197,5 +199,25 @@ public class DB {
             dbUsers.put(rs.getInt("userid"), rs.getString("userName"));
         }
         return dbUsers;
+    }
+    
+    public static void addAppointment(Appointment a) throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "INSERT INTO appointment (customerId, title, description, location, contact, url, start, end, createDate, createdBy, lastUpdateBy)"
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+        pstmt.setInt(1, a.getCustomerid());
+        pstmt.setString(2, a.getTitle());
+        pstmt.setString(3, a.getDescription());
+        pstmt.setString(4, a.getLocation());
+        pstmt.setString(5, a.getContact());
+        pstmt.setString(6, a.getUrl());
+        pstmt.setTimestamp(7, Timestamp.valueOf(a.getStart()));
+        pstmt.setTimestamp(8, Timestamp.valueOf(a.getEnd()));
+        pstmt.setDate(9, null);
+        pstmt.setString(10, "");
+        pstmt.setString(11, "");
+        pstmt.executeUpdate();
     }
 }
