@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javafx.stage.Stage;
 import static c195_schedulingapp.utils.TempDBCustomer.tempCustomer;
+import static c195_schedulingapp.utils.TempDBAppointment.tempAppointment;
 import static c195_schedulingapp.C195_SchedulingApp.state;
 import c195_schedulingapp.Model.Appointment;
 import java.sql.Timestamp;
@@ -72,6 +73,19 @@ public class DB {
         Customer temp = null;
         while (rs.next()) {
             temp = tempCustomer(rs);
+        }
+        return temp;
+    }
+    
+    public static Appointment searchAppointment(int id) throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement("SELECT * from appointment "
+                + "WHERE appointment.id = ?");
+        pstmt.setInt(1, id);
+        rs = pstmt.executeQuery();
+        Appointment temp = null;
+        while (rs.next()) {
+            temp = tempAppointment(rs);
         }
         return temp;
     }
@@ -221,7 +235,7 @@ public class DB {
         pstmt.executeUpdate();
     }
     
-        public static void updateAppointment(int id, int updatedId) throws ClassNotFoundException, SQLException{
+    public static void updateAppointment(int id, int updatedId) throws ClassNotFoundException, SQLException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
                 "SELECT * FROM appointment "
