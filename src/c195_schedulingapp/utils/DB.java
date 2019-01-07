@@ -221,7 +221,7 @@ public class DB {
         pstmt.executeUpdate();
     }
     
-        public static void updateApointment(int id, int updatedId) throws ClassNotFoundException, SQLException{
+        public static void updateAppointment(int id, int updatedId) throws ClassNotFoundException, SQLException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
                 "SELECT * FROM appointment "
