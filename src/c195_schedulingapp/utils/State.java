@@ -5,9 +5,8 @@
  */
 package c195_schedulingapp.utils;
 
+import c195_schedulingapp.Model.Appointment;
 import c195_schedulingapp.Model.Customer;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
 
 /**
@@ -18,6 +17,7 @@ import java.util.HashMap;
 public class State<T> {
     private HashMap<String, T> state;
     private Customer tempCustomer;
+    private Appointment tempAppointment;
     private Integer tempIndex;
     private Boolean isAuthed;
     private Boolean needsRefresh;
@@ -27,11 +27,13 @@ public class State<T> {
     public State() {
         this.setIsAuthed(null);
         this.setTempCustomer(new Customer());
+        this.setTempAppointment(new Appointment());
         this.setTempIndex(null);
         this.setNeedsRefresh(false);
         this.setLocation(null);
         state = new HashMap<>();
         state.put("tempCustomer", (T)tempCustomer);
+        state.put("tempAppointment", (T)tempAppointment);
         state.put("tempIndex", (T)tempIndex);
         state.put("isAuthed", (T)isAuthed);
         state.put("needsRefresh", (T)needsRefresh);
@@ -68,6 +70,14 @@ public class State<T> {
         this.tempCustomer = tempCustomer;
     }
 
+    public Appointment getTempAppointment() {
+        return tempAppointment;
+    }
+
+    public void setTempAppointment(Appointment tempAppointment) {
+        this.tempAppointment = tempAppointment;
+    }
+    
     public Integer getTempIndex() {
         return tempIndex;
     }
