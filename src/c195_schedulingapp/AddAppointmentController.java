@@ -6,6 +6,7 @@
 package c195_schedulingapp;
 
 import c195_schedulingapp.Model.Appointment;
+import c195_schedulingapp.utils.AppointmentRow;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -22,6 +23,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.stage.Stage;
+import static c195_schedulingapp.AppointmentsController.appointments;
 /**
  * FXML Controller class
  *
@@ -94,8 +98,23 @@ public class AddAppointmentController implements Initializable {
         a.setStart(startFormatted);
         a.setEnd(endFormatted);
         addAppointment(a);
+        
+        AppointmentRow tr = new AppointmentRow(
+                            new SimpleStringProperty("1"),
+                            new SimpleStringProperty(String.valueOf(a.getCustomerid())),
+                            new SimpleStringProperty(a.getTitle()),
+                            new SimpleStringProperty(a.getDescription()),
+                            new SimpleStringProperty(a.getLocation()),
+                            new SimpleStringProperty(a.getContact()),
+                            new SimpleStringProperty(a.getUrl()),
+                            new SimpleStringProperty(a.getStart()),
+                            new SimpleStringProperty(a.getEnd())
+        );
+        appointments.add(tr);
+        Stage stage = (Stage) save.getScene().getWindow();
+        stage.close();
     }
-    
+  
     @FXML void testPrint(){
         LocalDateTime dt = LocalDateTime.of(date.getValue(), LocalTime.parse(startTime.getValue().toString()));
         String fdt = DateTimeFormatter
