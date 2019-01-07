@@ -44,10 +44,12 @@ public class AppointmentsController implements Initializable {
     @FXML private TableColumn<AppointmentRow, String> locationCol;
     @FXML private TableColumn<AppointmentRow, String> contactCol;
     @FXML private TableColumn<AppointmentRow, String> urlCol;
-    @FXML private TableColumn<AppointmentRow, Time> startCol;
-    @FXML private TableColumn<AppointmentRow, Time> endCol;
+    @FXML private TableColumn<AppointmentRow, String> startCol;
+    @FXML private TableColumn<AppointmentRow, String> endCol;
     @FXML private TableView appointmentsTable;
     @FXML private Button customersBtn;
+    
+    public static ObservableList<AppointmentRow> appointments = FXCollections.observableArrayList();
     
     @FXML public void openCustomers() throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("Customers.fxml"));
@@ -70,7 +72,6 @@ public class AppointmentsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try{
-            ObservableList<AppointmentRow> appointments = FXCollections.observableArrayList();
             ResultSet rs = getAppointments();
             idCol.setCellValueFactory(cellData -> {return cellData.getValue().getCustomerId();});
             customerCol.setCellValueFactory(cellData -> {return cellData.getValue().getCustomerId();});
