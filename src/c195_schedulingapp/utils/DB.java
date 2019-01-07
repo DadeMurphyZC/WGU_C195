@@ -220,4 +220,13 @@ public class DB {
         pstmt.setString(11, "");
         pstmt.executeUpdate();
     }
+    
+    public static void deleteAppointment(int id) throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "DELETE from appointment "
+                + "WHERE appointment.appointmentid = ?");
+        pstmt.setInt(1, id);
+        pstmt.execute();
+    }
 }
