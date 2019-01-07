@@ -16,16 +16,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import static c195_schedulingapp.utils.DB.*;
-import java.util.Date;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 /**
  * FXML Controller class
  *
@@ -75,7 +71,7 @@ public class AddAppointmentController implements Initializable {
         generateHours().forEach((t)->endTime.getItems().add(t));
     }
     
-    @FXML void testAdd() throws ParseException{
+    @FXML void testAdd() throws ParseException, ClassNotFoundException, SQLException{
         LocalDateTime start = LocalDateTime.of(date.getValue(), LocalTime.parse(startTime.getValue().toString()));
         String startFormatted = DateTimeFormatter
                         .ofPattern("yyyy-MM-dd HH:mm:ss")
@@ -88,13 +84,16 @@ public class AddAppointmentController implements Initializable {
                         .toFormat()
                         .format(end);
         
-        System.out.println("Customer: "+customer.getSelectionModel().getSelectedItem());
-        System.out.println("Title: "+title.getText());
-        System.out.println("Description: "+description.getSelectionModel().getSelectedItem());
-        System.out.println("Location: "+location.getSelectionModel().getSelectedItem());
-        System.out.println("Contact: "+contact.getSelectionModel().getSelectedItem());
-        System.out.println("Start: "+startFormatted);
-        System.out.println("End: "+endFormatted);
+        Appointment a = new Appointment();
+        a.setCustomerid(1);
+        a.setTitle(title.getText());
+        a.setDescription(description.getSelectionModel().getSelectedItem().toString());
+        a.setLocation(location.getSelectionModel().getSelectedItem().toString());
+        a.setContact(contact.getSelectionModel().getSelectedItem().toString());
+        a.setUrl("test");
+        a.setStart(startFormatted);
+        a.setEnd(endFormatted);
+        addAppointment(a);
     }
     
     @FXML void testPrint(){
