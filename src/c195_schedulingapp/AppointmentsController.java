@@ -66,6 +66,14 @@ public class AppointmentsController implements Initializable {
         stage.show();
     }
     
+    @FXML public void editAppointment() throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("EditAppointment.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+    
     /**
      * Initializes the controller class.
      */
