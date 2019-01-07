@@ -221,6 +221,20 @@ public class DB {
         pstmt.executeUpdate();
     }
     
+        public static void updateApointment(int id, int updatedId) throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "SELECT * FROM appointment "
+                + "WHERE appointment.appointmentid = ?", ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+        pstmt.setInt(1, id);
+        rs = pstmt.executeQuery();
+        while(rs.next()){
+            rs.updateInt("appointmentid", updatedId);
+            rs.updateRow();
+        }
+        if(pstmt!=null){pstmt.close();}
+    }
+    
     public static void deleteAppointment(int id) throws ClassNotFoundException, SQLException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
