@@ -5,6 +5,7 @@
  */
 package c195_schedulingapp.utils;
 
+import c195_schedulingapp.Model.Appointment;
 import java.sql.Time;
 import javafx.beans.value.ObservableValue;
 
@@ -20,10 +21,10 @@ public class AppointmentRow {
     private ObservableValue<String> location;
     private ObservableValue<String> contact;
     private ObservableValue<String> url;
-    private ObservableValue<Time> start;
-    private ObservableValue<Time> end;
+    private ObservableValue<String> start;
+    private ObservableValue<String> end;
 
-        public AppointmentRow(ObservableValue<String> appointmentId, ObservableValue<String> customerId, ObservableValue<String> title, ObservableValue<String> description, ObservableValue<String> location, ObservableValue<String> contact, ObservableValue<String> url, ObservableValue<Time> start, ObservableValue<Time> end) {
+        public AppointmentRow(ObservableValue<String> appointmentId, ObservableValue<String> customerId, ObservableValue<String> title, ObservableValue<String> description, ObservableValue<String> location, ObservableValue<String> contact, ObservableValue<String> url, ObservableValue<String> start, ObservableValue<String> end) {
             this.appointmentId = appointmentId;
             this.customerId = customerId;
             this.title = title;
@@ -34,7 +35,7 @@ public class AppointmentRow {
             this.start = start;
             this.end = end;
         }
-
+        
         public ObservableValue<String> getAppointmentId() {
             return appointmentId;
         }
@@ -91,19 +92,19 @@ public class AppointmentRow {
             this.url = url;
         }
 
-        public ObservableValue<Time> getStart() {
+        public ObservableValue<String> getStart() {
             return start;
         }
 
-        public void setStart(ObservableValue<Time> start) {
+        public void setStart(ObservableValue<String> start) {
             this.start = start;
         }
 
-        public ObservableValue<Time> getEnd() {
+        public ObservableValue<String> getEnd() {
             return end;
         }
 
-        public void setEnd(ObservableValue<Time> end) {
+        public void setEnd(ObservableValue<String> end) {
             this.end = end;
         }
 }
