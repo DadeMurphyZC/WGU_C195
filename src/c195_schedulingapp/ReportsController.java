@@ -40,9 +40,9 @@ public class ReportsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        if(reportsCB.getItems().isEmpty()){} else {
+        if(reportsCB.getItems().isEmpty()){System.out.println("No reports found.");} else {
             reportsCB.getItems().clear();
-        };
+        }
         populateReports();
     }    
     
