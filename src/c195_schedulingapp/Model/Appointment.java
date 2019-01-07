@@ -20,10 +20,10 @@ public class Appointment {
     private String location;
     private String contact;
     private String url;
-    private Time start;
-    private Time end;
+    private String start;
+    private String end;
      
-    public Appointment(int appointmentId, String title, String description, String location, String contact, String url, Time start, Time end) {
+    public Appointment(int appointmentId, String title, String description, String location, String contact, String url, String start, String end) {
         this.appointmentId = appointmentId;
         this.title = title;
         this.description = description;
@@ -92,19 +92,19 @@ public class Appointment {
         this.url = url;
     }
 
-    public Time getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Time start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public Time getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(Time end) {
+    public void setEnd(String end) {
         this.end = end;
     }
     
