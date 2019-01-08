@@ -98,6 +98,10 @@ public class State<T> {
         this.tempCustomer = null;
     }
     
+    public void clearTempAppointment(){
+        this.tempAppointment = null;
+    }
+    
     public void clearTempIndex(){
         this.tempIndex = null;
     }
