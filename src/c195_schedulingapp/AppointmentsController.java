@@ -6,11 +6,13 @@
 package c195_schedulingapp;
 
 import static c195_schedulingapp.C195_SchedulingApp.appStage;
+import static c195_schedulingapp.C195_SchedulingApp.state;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import c195_schedulingapp.utils.AppointmentRow;
 import static c195_schedulingapp.utils.DB.getAppointments;
+import static c195_schedulingapp.utils.DB.searchAppointment;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,6 +50,7 @@ public class AppointmentsController implements Initializable {
     @FXML private TableColumn<AppointmentRow, String> endCol;
     @FXML private TableView appointmentsTable;
     @FXML private Button customersBtn;
+    public static AppointmentRow selected = new AppointmentRow();
     
     public static ObservableList<AppointmentRow> appointments = FXCollections.observableArrayList();
     
@@ -66,7 +69,17 @@ public class AppointmentsController implements Initializable {
         stage.show();
     }
     
-    @FXML public void editAppointment() throws IOException{
+    private void loadAppointment() throws ClassNotFoundException, SQLException{
+        state.clearTempAppointment();
+        state.clearTempIndex();
+        selected = (AppointmentRow) appointmentsTable.getSelectionModel().getSelectedItem();
+        System.out.println("Selected: "+selected.getAppointmentId());
+        state.setTempAppointment(searchAppointment(Integer.parseInt(selected.getAppointmentId().getValue())));
+    }
+    
+    @FXML public void editAppointment() throws IOException, ClassNotFoundException, SQLException{
+        loadAppointment();
+        state.setTempIndex(appointmentsTable.getSelectionModel().getSelectedIndex());
         Parent root = FXMLLoader.load(getClass().getResource("EditAppointment.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
