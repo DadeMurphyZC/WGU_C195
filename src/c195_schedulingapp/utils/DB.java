@@ -80,7 +80,7 @@ public class DB {
     public static Appointment searchAppointment(int id) throws ClassNotFoundException, SQLException{
         conn = dbConnect();
         pstmt = conn.prepareStatement("SELECT * from appointment "
-                + "WHERE appointment.id = ?");
+                + "WHERE appointment.appointmentid = ?");
         pstmt.setInt(1, id);
         rs = pstmt.executeQuery();
         Appointment temp = null;
