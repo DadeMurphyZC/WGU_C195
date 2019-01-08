@@ -35,6 +35,9 @@ public class AppointmentRow {
             this.start = start;
             this.end = end;
         }
+
+    public AppointmentRow() {  
+    }
         
         public ObservableValue<String> getAppointmentId() {
             return appointmentId;
