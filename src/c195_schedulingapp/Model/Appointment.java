@@ -107,5 +107,9 @@ public class Appointment {
     public void setEnd(String end) {
         this.end = end;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Appointment{" + "appointmentId=" + appointmentId + ", customerid=" + customerid + ", title=" + title + ", description=" + description + ", location=" + location + ", contact=" + contact + ", url=" + url + ", start=" + start + ", end=" + end + '}';
+    }
 }
