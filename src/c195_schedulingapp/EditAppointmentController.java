@@ -5,6 +5,8 @@
  */
 package c195_schedulingapp;
 
+import c195_schedulingapp.Model.Appointment;
+import static c195_schedulingapp.C195_SchedulingApp.state;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -41,6 +43,14 @@ public class EditAppointmentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Appointment appt = state.getTempAppointment();
+        contact.getSelectionModel().select(appt.getContact());
+        customer.getSelectionModel().select(appt.getCustomerid());
+        description.getSelectionModel().select(appt.getDescription());
+        location.getSelectionModel().select(appt.getLocation());
+        startTime.getSelectionModel().select(appt.getStart());
+        endTime.getSelectionModel().select(appt.getEnd());
+        
     }    
     
 }
