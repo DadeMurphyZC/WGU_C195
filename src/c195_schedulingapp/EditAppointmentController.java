@@ -35,14 +35,6 @@ public class EditAppointmentController implements Initializable {
     @FXML private Button cancel;
     
     public void populateForm(){
-        
-    }
-    
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
         Appointment appt = state.getTempAppointment();
         contact.getSelectionModel().select(appt.getContact());
         customer.getSelectionModel().select(appt.getCustomerid());
@@ -50,7 +42,14 @@ public class EditAppointmentController implements Initializable {
         location.getSelectionModel().select(appt.getLocation());
         startTime.getSelectionModel().select(appt.getStart());
         endTime.getSelectionModel().select(appt.getEnd());
-        
+    }
+    
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        populateForm();
     }    
     
 }
