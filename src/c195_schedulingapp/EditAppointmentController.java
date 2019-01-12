@@ -8,6 +8,7 @@ package c195_schedulingapp;
 import c195_schedulingapp.Model.Appointment;
 import static c195_schedulingapp.C195_SchedulingApp.state;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,6 +41,7 @@ public class EditAppointmentController implements Initializable {
         customer.getSelectionModel().select(appt.getCustomerid());
         description.getSelectionModel().select(appt.getDescription());
         location.getSelectionModel().select(appt.getLocation());
+        date.setValue(LocalDate.parse(state.getTempAppointment().getStart().substring(0, 10)));
         startTime.getSelectionModel().select(appt.getStart());
         endTime.getSelectionModel().select(appt.getEnd());
     }
