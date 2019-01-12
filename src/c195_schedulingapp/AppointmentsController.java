@@ -8,28 +8,20 @@ package c195_schedulingapp;
 import static c195_schedulingapp.C195_SchedulingApp.appStage;
 import static c195_schedulingapp.C195_SchedulingApp.state;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 import javafx.fxml.Initializable;
 import c195_schedulingapp.utils.AppointmentRow;
 import static c195_schedulingapp.utils.DB.getAppointments;
 import static c195_schedulingapp.utils.DB.searchAppointment;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import java.sql.*;
+import java.sql.Date;
+import java.time.LocalDate;
+import javafx.beans.property.*;
+import javafx.collections.*;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 /**
@@ -76,7 +68,7 @@ public class AppointmentsController implements Initializable {
         System.out.println("Selected: "+selected.getAppointmentId());
         state.setTempAppointment(searchAppointment(Integer.parseInt(selected.getAppointmentId().getValue())));
     }
-    
+      
     @FXML public void editAppointment() throws IOException, ClassNotFoundException, SQLException{
         loadAppointment();
         state.setTempIndex(appointmentsTable.getSelectionModel().getSelectedIndex());
@@ -128,10 +120,10 @@ public class AppointmentsController implements Initializable {
                 }
                 appointmentsTable.setItems(appointments);
             } catch (SQLException ex) {
-                Logger.getLogger(CustomersController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex.getStackTrace().toString());
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(CustomersController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getStackTrace().toString());
         }
     }    
     
