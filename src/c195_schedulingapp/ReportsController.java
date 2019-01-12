@@ -26,9 +26,9 @@ public class ReportsController implements Initializable {
     final ArrayList reports = new ArrayList();
     
     public void populateReports(){
-        reports.add("Report 1");
-        reports.add("Report 2");
-        reports.add("Report 3");
+        reports.add("Appointment types by month");
+        reports.add("Consultant schedules");
+        reports.add("Test");
         reportsCB.getItems().addAll(reports);
     }
     
