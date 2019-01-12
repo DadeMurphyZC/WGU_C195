@@ -7,9 +7,18 @@ package c195_schedulingapp;
 
 import c195_schedulingapp.Model.Appointment;
 import static c195_schedulingapp.C195_SchedulingApp.state;
+import static c195_schedulingapp.utils.DB.getCities;
+import static c195_schedulingapp.utils.DB.getCustomersArray;
+import static c195_schedulingapp.utils.DB.getUsers;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -35,6 +44,37 @@ public class EditAppointmentController implements Initializable {
     @FXML private Button save;
     @FXML private Button cancel;
     
+    private HashMap contactOptions = new HashMap();
+    private ArrayList customerOptions = new ArrayList();
+    private ArrayList descriptionOptions = new ArrayList();
+    private HashMap locationOptions = new HashMap();
+    private ArrayList<LocalTime> times = new ArrayList<>();
+    
+    //populates available times
+    private ArrayList generateHours(){
+        ArrayList<LocalTime> times = new ArrayList<>();
+        for(int i=8; i<=17; i++){
+            times.add(LocalTime.of(i, 0, 0));
+        }
+        return times;
+    }
+    
+    //populates the combobox options
+    private void setComboBoxes() throws ClassNotFoundException, SQLException{
+        descriptionOptions.add("First Consultation");
+        descriptionOptions.add("First Meeting");
+        descriptionOptions.add("Follow-up");
+        contactOptions = getUsers();
+        customerOptions = getCustomersArray();
+        locationOptions = getCities();
+        contactOptions.forEach((k,v)->contact.getItems().add(v));
+        customerOptions.forEach((c)->customer.getItems().add(c));
+        descriptionOptions.forEach((d)->description.getItems().add(d));
+        locationOptions.forEach((k,v)->location.getItems().add(v));
+        generateHours().forEach((t)->startTime.getItems().add((LocalTime)t));
+        generateHours().forEach((t)->endTime.getItems().add(t));
+    }
+    
     public void populateForm(){
         Appointment appt = state.getTempAppointment();
         contact.getSelectionModel().select(appt.getContact());
@@ -51,7 +91,12 @@ public class EditAppointmentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        populateForm();
+        try {
+            populateForm();
+            setComboBoxes();
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
+        }
     }    
     
 }
