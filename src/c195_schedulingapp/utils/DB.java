@@ -101,6 +101,17 @@ public class DB {
         return rs;
     }
     
+    public static ResultSet getApptsByUser() throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "SELECT contact, appointmentid, title, description, location, start, end "
+                        + "FROM appointment "
+                        + "ORDER BY appointment.contact"
+        );
+        rs = pstmt.executeQuery();
+        return rs;
+    }
+    
     public static ArrayList getCustomersArray() throws ClassNotFoundException, SQLException{
         ArrayList customers = new ArrayList();
         conn = dbConnect();
