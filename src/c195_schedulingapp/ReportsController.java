@@ -51,34 +51,28 @@ public class ReportsController implements Initializable {
         reportsCB.getSelectionModel().selectFirst();
     }
     
-    public void reportsTest(){
-        System.out.println("Running report: "+reportsCB.getSelectionModel().getSelectedItem().toString());
-    }
-    
     String report;
-    public void getReport(){
+    public void getReport() throws SQLException, ClassNotFoundException{
         report = reportsCB.getSelectionModel().getSelectedItem().toString();
         switch(report){
             case "Appointment types by month": 
+                //test
+                reportsList.clear();
                 System.out.println("Getting appt types by month");
                 break;
             case "Consultant schedules": 
-                System.out.println("Getting consultant schedules");
+                getApptsByUserReport();
                 break;
-            case "Test": 
+            case "Test":
+                //test
+                reportsList.clear();
                 System.out.println("Getting test report");
                 break;
         }; 
     }
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        reportsList.clear();
-        populateReports();
-        reportCol.setCellValueFactory(c ->  c.getValue().getRow());
-        try {
+    
+    public void getApptsByUserReport() throws SQLException, ClassNotFoundException{
+        reportsTable.getItems().clear();
             ResultSet rs = getApptsByUser();
             while(rs.next()){
                 String report = rs.getString(1)+"    -    "
@@ -94,9 +88,16 @@ public class ReportsController implements Initializable {
                 reportsList.add(rr);
             }
             reportsTable.setItems(reportsList);
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println(ex);
-        }
+    }
+    
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        reportsList.clear();
+        populateReports();
+        reportCol.setCellValueFactory(c ->  c.getValue().getRow());
     }    
     
 }
