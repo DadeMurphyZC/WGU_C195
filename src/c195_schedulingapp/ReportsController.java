@@ -54,6 +54,22 @@ public class ReportsController implements Initializable {
     public void reportsTest(){
         System.out.println("Running report: "+reportsCB.getSelectionModel().getSelectedItem().toString());
     }
+    
+    String report;
+    public void getReport(){
+        report = reportsCB.getSelectionModel().getSelectedItem().toString();
+        switch(report){
+            case "Appointment types by month": 
+                System.out.println("Getting appt types by month");
+                break;
+            case "Consultant schedules": 
+                System.out.println("Getting consultant schedules");
+                break;
+            case "Test": 
+                System.out.println("Getting test report");
+                break;
+        }; 
+    }
     /**
      * Initializes the controller class.
      */
