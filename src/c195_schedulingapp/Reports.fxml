@@ -22,12 +22,12 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TableView layoutY="102.0" prefHeight="666.0" prefWidth="1024.0">
+      <TableView fx:id="reportsTable" layoutY="102.0" prefHeight="666.0" prefWidth="1024.0">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
          <columns>
-            <TableColumn prefWidth="342.0" />
+            <TableColumn fx:id="reportCol" prefWidth="342.0" />
          </columns>
       </TableView>
       <ComboBox fx:id="reportsCB" layoutX="162.0" layoutY="67.0" prefHeight="25.0" prefWidth="338.0" />
