@@ -5,6 +5,7 @@
  */
 package c195_schedulingapp;
 
+import static c195_schedulingapp.utils.DB.getApptTypesByMonth;
 import static c195_schedulingapp.utils.DB.getApptsByUser;
 import c195_schedulingapp.utils.ReportRow;
 import java.net.URL;
@@ -58,7 +59,7 @@ public class ReportsController implements Initializable {
             case "Appointment types by month": 
                 //test
                 reportsList.clear();
-                System.out.println("Getting appt types by month");
+                getApptTypesByMonthReport();
                 break;
             case "Consultant schedules": 
                 getApptsByUserReport();
@@ -71,9 +72,32 @@ public class ReportsController implements Initializable {
         }; 
     }
     
+    public void getApptTypesByMonthReport() throws ClassNotFoundException, SQLException{
+        reportsTable.getItems().clear();
+        ResultSet rs = getApptTypesByMonth();
+        reportsList.clear();
+        while(rs.next()){
+            String report = rs.getString(1)+"    -    "
+                        + rs.getString(2)+"    ||     "
+                        + rs.getString(3)+" || "
+                        + rs.getString(4)+" || "
+                        + rs.getString(5)+" || "
+                        + rs.getString(6)+" || "
+                        + rs.getString(7)+" || "
+                        + rs.getString(8)+" || "
+                        + rs.getString(9);
+            ReportRow rr = new ReportRow(
+                    new ReadOnlyStringWrapper(report)
+            );
+            reportsList.add(rr);
+        }
+        reportsTable.setItems(reportsList);
+    }
+    
     public void getApptsByUserReport() throws SQLException, ClassNotFoundException{
         reportsTable.getItems().clear();
             ResultSet rs = getApptsByUser();
+            reportsList.clear();
             while(rs.next()){
                 String report = rs.getString(1)+"    -    "
                         + rs.getString(2)+"    ||     "
