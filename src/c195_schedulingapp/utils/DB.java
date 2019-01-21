@@ -101,6 +101,27 @@ public class DB {
         return rs;
     }
     
+    public static ResultSet getApptTypesByMonth() throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "select concat(monthname(date(start)),\" - \",year(date(start))) as month, "
+                + "appointmentid, " 
+                + "customer.customerName, "
+                + "title, "
+                + "description, "
+                + "location, "
+                + "contact, "
+                + "date(start) as date, "
+                + "time(start) as start, "
+                + "time(end) as end "
+                + "from appointment "
+                + "join customer "
+                + "where appointment.customerId = customer.customerid;"
+        );
+        rs = pstmt.executeQuery();
+        return rs;
+    }
+    
     public static ResultSet getApptsByUser() throws ClassNotFoundException, SQLException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
