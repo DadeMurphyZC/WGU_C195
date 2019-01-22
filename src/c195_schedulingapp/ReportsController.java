@@ -6,6 +6,7 @@
 package c195_schedulingapp;
 
 import static c195_schedulingapp.utils.DB.getApptTypesByMonth;
+import static c195_schedulingapp.utils.DB.getApptsByLocation;
 import static c195_schedulingapp.utils.DB.getApptsByUser;
 import c195_schedulingapp.utils.ReportRow;
 import java.net.URL;
@@ -47,7 +48,7 @@ public class ReportsController implements Initializable {
     public void populateReports(){
         reportshm.put(1, "Appointment types by month");
         reportshm.put(2, "Consultant schedules");
-        reportshm.put(3, "Test");
+        reportshm.put(3, "Appointments by location");
         reportsCB.getItems().addAll(reportshm.values());
         reportsCB.getSelectionModel().selectFirst();
     }
@@ -64,10 +65,10 @@ public class ReportsController implements Initializable {
             case "Consultant schedules": 
                 getApptsByUserReport();
                 break;
-            case "Test":
+            case "Appointments by location":
                 //test
                 reportsList.clear();
-                System.out.println("Getting test report");
+                getApptsByLocationReport();
                 break;
         }; 
     }
@@ -106,6 +107,23 @@ public class ReportsController implements Initializable {
                         + rs.getString(5)+" || "
                         + rs.getString(6)+" || "
                         + rs.getString(7);
+                ReportRow rr = new ReportRow(
+                        new ReadOnlyStringWrapper(report)
+                );
+                reportsList.add(rr);
+            }
+            reportsTable.setItems(reportsList);
+    }
+    
+    public void getApptsByLocationReport() throws SQLException, ClassNotFoundException{
+        reportsTable.getItems().clear();
+            ResultSet rs = getApptsByLocation();
+            reportsList.clear();
+            while(rs.next()){
+                String report = rs.getString(1)+"    ||    "
+                        + rs.getString(2)+"    ||     "
+                        + rs.getString(3)+"    ||    "
+                        + rs.getString(4);
                 ReportRow rr = new ReportRow(
                         new ReadOnlyStringWrapper(report)
                 );
