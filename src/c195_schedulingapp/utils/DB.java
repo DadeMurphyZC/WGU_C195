@@ -133,6 +133,17 @@ public class DB {
         return rs;
     }
     
+    public static ResultSet getApptsByLocation() throws SQLException, ClassNotFoundException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "SELECT location, appointmentid, date(start), time(start) "
+                        + "FROM appointment "
+                        + "ORDER BY location;"
+        );
+        rs = pstmt.executeQuery();
+        return rs;
+    }
+    
     public static ArrayList getCustomersArray() throws ClassNotFoundException, SQLException{
         ArrayList customers = new ArrayList();
         conn = dbConnect();
