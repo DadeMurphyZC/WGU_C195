@@ -22,10 +22,10 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="293.0" layoutY="67.0" mnemonicParsing="false" text="Get Month" />
-      <Button layoutX="373.0" layoutY="67.0" mnemonicParsing="false" text="Get Weekly" />
-      <ComboBox layoutX="135.0" layoutY="67.0" prefWidth="150.0" promptText="Select Month" />
-      <TableView layoutY="102.0" prefHeight="666.0" prefWidth="1024.0">
+      <Button fx:id="getMonthlyBtn" layoutX="293.0" layoutY="67.0" mnemonicParsing="false" text="Get Month" />
+      <Button fx:id="getWeeklyBtn" layoutX="373.0" layoutY="67.0" mnemonicParsing="false" text="Get Weekly" />
+      <ComboBox fx:id="months" layoutX="135.0" layoutY="67.0" prefWidth="150.0" promptText="Select Month" />
+      <TableView layoutY="92.0" prefHeight="666.0" prefWidth="1024.0">
         <columns>
           <TableColumn minWidth="1024.0" prefWidth="75.0" text="Appointment Calendar" />
         </columns>
