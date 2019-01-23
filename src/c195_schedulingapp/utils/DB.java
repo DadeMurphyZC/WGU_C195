@@ -122,6 +122,17 @@ public class DB {
         return rs;
     }
     
+    public static ResultSet getApptsByMonth(String month) throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "SELECT * from appointment "
+                        + "WHERE month(start) = ?"
+        );
+        pstmt.setString(1, month);
+        rs = pstmt.executeQuery();
+        return rs;
+    }
+    
     public static ResultSet getApptsByUser() throws ClassNotFoundException, SQLException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
