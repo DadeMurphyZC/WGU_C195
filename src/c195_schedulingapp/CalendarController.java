@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 /**
  * FXML Controller class
@@ -22,6 +24,8 @@ public class CalendarController implements Initializable {
     @FXML private ComboBox months;
     @FXML private Button getMonthlyBtn;
     @FXML private Button getWeeklyBtn;
+    @FXML private TableView calendarTable;
+    @FXML private TableColumn calendarCol;
     
     private void setMonths(){
         months.getItems().clear();
