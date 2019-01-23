@@ -53,6 +53,20 @@ public class AppointmentsController implements Initializable {
         appStage.show();
     }
     
+    @FXML public void openReports() throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("Reports.fxml"));
+        Scene scene = new Scene(root);
+        appStage.setScene(scene);
+        appStage.show();
+    }
+    
+    @FXML public void openCalendar() throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("Calendar.fxml"));
+        Scene scene = new Scene(root);
+        appStage.setScene(scene);
+        appStage.show();
+    }
+    
     @FXML public void addAppointment() throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("AddAppointment.fxml"));
         Scene scene = new Scene(root);
