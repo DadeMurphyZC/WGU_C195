@@ -7,7 +7,10 @@ package c195_schedulingapp;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 
 /**
  * FXML Controller class
@@ -15,13 +18,35 @@ import javafx.fxml.Initializable;
  * @author cfonseca
  */
 public class CalendarController implements Initializable {
-
+    
+    @FXML private ComboBox months;
+    @FXML private Button getMonthlyBtn;
+    @FXML private Button getWeeklyBtn;
+    
+    private void setMonths(){
+        months.getItems().clear();
+        months.getItems().setAll
+           ("January", 
+            "February", 
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "Obtober",
+            "November",
+            "December"
+           );
+    }
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        setMonths();
     }    
     
 }
