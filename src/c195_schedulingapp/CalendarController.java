@@ -8,6 +8,10 @@ package c195_schedulingapp;
 import static c195_schedulingapp.C195_SchedulingApp.appStage;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.Month;
+import java.time.YearMonth;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -76,6 +80,29 @@ public class CalendarController implements Initializable {
                 "November",
                 "December"
         );
+    }
+    
+    @FXML private void getMonth(){
+        System.out.println(months.getSelectionModel().getSelectedItem().toString());
+    }
+    
+    private void printWeeks(int max){
+        String m = months.getSelectionModel().getSelectedItem().toString();
+        System.out.println("Week of "+m+" "+1+" - "+m+" "+7);
+        System.out.println("Week of "+m+" "+8+" - "+m+" "+14);
+        System.out.println("Week of "+m+" "+15+" - "+m+" "+21);
+        if(max<29){
+            System.out.println("Week of "+m+" "+22+" - "+m+" "+max);
+        } else {
+            System.out.println("Week of "+m+" "+22+" - "+m+" "+28);
+            System.out.println("Week of "+m+" "+29+" - "+m+" "+max);
+        }
+    }
+    
+    @FXML private void getWeek(){
+        String m = months.getSelectionModel().getSelectedItem().toString();
+        int max = Month.valueOf(m.toUpperCase()).maxLength();
+        printWeeks(max);
     }
 
     /**
