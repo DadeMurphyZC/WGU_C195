@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -40,6 +41,18 @@ public class CalendarController implements Initializable {
     private TableView calendarTable;
     @FXML
     private TableColumn calendarCol;
+    @FXML
+    private TableColumn week1col;
+    @FXML
+    private TableColumn week2col;
+    @FXML
+    private TableColumn week3col;
+    @FXML
+    private TableColumn week4col;
+    @FXML
+    private TableColumn week5col;
+    @FXML
+    private VBox vbox;
 
     @FXML
     public void openAppointments() throws IOException {
@@ -83,11 +96,28 @@ public class CalendarController implements Initializable {
     }
     
     @FXML private void getMonth(){
+        calendarCol.setText(months.getSelectionModel().getSelectedItem().toString());
+        calendarCol.setVisible(true);
+        week1col.setVisible(false);
+        week2col.setVisible(false);
+        week3col.setVisible(false);
+        week4col.setVisible(false);
+        week5col.setVisible(false);
         System.out.println(months.getSelectionModel().getSelectedItem().toString());
     }
     
     private void printWeeks(int max){
         String m = months.getSelectionModel().getSelectedItem().toString();
+        week1col.setText(m+" "+1+" - "+m+" "+7);
+        week2col.setText(m+" "+8+" - "+m+" "+14);
+        week3col.setText(m+" "+15+" - "+m+" "+21);
+        if(max<29){
+            week4col.setText(m+" "+22+" - "+m+" "+max);
+        } else {
+            week4col.setText(m+" "+22+" - "+m+" "+28);
+            week5col.setText(m+" "+29+" - "+m+" "+max);
+        }
+        
         System.out.println("Week of "+m+" "+1+" - "+m+" "+7);
         System.out.println("Week of "+m+" "+8+" - "+m+" "+14);
         System.out.println("Week of "+m+" "+15+" - "+m+" "+21);
@@ -100,6 +130,12 @@ public class CalendarController implements Initializable {
     }
     
     @FXML private void getWeek(){
+        calendarCol.setVisible(false);
+        week1col.setVisible(true);
+        week2col.setVisible(true);
+        week3col.setVisible(true);
+        week4col.setVisible(true);
+        week5col.setVisible(true);
         String m = months.getSelectionModel().getSelectedItem().toString();
         int max = Month.valueOf(m.toUpperCase()).maxLength();
         printWeeks(max);
