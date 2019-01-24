@@ -25,10 +25,19 @@
       <Button fx:id="getMonthlyBtn" layoutX="293.0" layoutY="67.0" mnemonicParsing="false" onAction="#getMonth" text="Get Month" />
       <Button fx:id="getWeeklyBtn" layoutX="373.0" layoutY="67.0" mnemonicParsing="false" onAction="#getWeek" text="Get Weekly" />
       <ComboBox fx:id="months" layoutX="135.0" layoutY="67.0" prefWidth="150.0" promptText="Select Month" />
-      <TableView fx:id="calendarTable" layoutY="92.0" prefHeight="666.0" prefWidth="1024.0">
-        <columns>
-          <TableColumn fx:id="calendarCol" minWidth="1024.0" prefWidth="75.0" text="Appointment Calendar" />
-        </columns>
-      </TableView>
+      <VBox layoutY="102.0" prefHeight="666.0" prefWidth="1024.0">
+         <children>
+            <TableView fx:id="calendarTable" prefHeight="666.0" prefWidth="1024.0">
+              <columns>
+                <TableColumn fx:id="calendarCol" minWidth="1024.0" prefWidth="75.0" text="Monthly View" />
+                  <TableColumn fx:id="week1col" prefWidth="204.8" text="Week 1" visible="false" />
+                  <TableColumn fx:id="week2col" prefWidth="204.8" text="Week 2" visible="false" />
+                  <TableColumn fx:id="week3col" prefWidth="204.8" text="Week 3" visible="false" />
+                  <TableColumn fx:id="week4col" prefWidth="204.8" text="Week 4" visible="false" />
+                  <TableColumn fx:id="week5col" prefWidth="204.8" text="Week 5" visible="false" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
