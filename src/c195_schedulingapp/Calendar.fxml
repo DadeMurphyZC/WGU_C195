@@ -22,8 +22,8 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="getMonthlyBtn" layoutX="293.0" layoutY="67.0" mnemonicParsing="false" text="Get Month" />
-      <Button fx:id="getWeeklyBtn" layoutX="373.0" layoutY="67.0" mnemonicParsing="false" text="Get Weekly" />
+      <Button fx:id="getMonthlyBtn" layoutX="293.0" layoutY="67.0" mnemonicParsing="false" onAction="#getMonth" text="Get Month" />
+      <Button fx:id="getWeeklyBtn" layoutX="373.0" layoutY="67.0" mnemonicParsing="false" onAction="#getWeek" text="Get Weekly" />
       <ComboBox fx:id="months" layoutX="135.0" layoutY="67.0" prefWidth="150.0" promptText="Select Month" />
       <TableView fx:id="calendarTable" layoutY="92.0" prefHeight="666.0" prefWidth="1024.0">
         <columns>
