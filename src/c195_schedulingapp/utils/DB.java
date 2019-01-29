@@ -163,15 +163,6 @@ public class DB {
         return customers;
     }
     
-    public static void deleteCustomer(String name) throws ClassNotFoundException, SQLException{
-        conn = dbConnect();
-        pstmt = conn.prepareStatement(
-                "DELETE from customer "
-                + "WHERE customer.customerName = ?");
-        pstmt.setString(1, name);
-        pstmt.execute();
-    }
-    
     public static ResultSet getAppointments() throws SQLException, ClassNotFoundException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
@@ -239,6 +230,15 @@ public class DB {
             rs.updateRow();
         }
         if(pstmt!=null){pstmt.close();}
+    }
+        
+    public static void deleteCustomer(String name) throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "DELETE from customer "
+                + "WHERE customer.customerName = ?");
+        pstmt.setString(1, name);
+        pstmt.execute();
     }
     
     public static HashMap getCities() throws ClassNotFoundException, SQLException{
