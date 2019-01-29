@@ -6,13 +6,21 @@
 package c195_schedulingapp;
 
 import static c195_schedulingapp.C195_SchedulingApp.appStage;
+import c195_schedulingapp.utils.AppointmentRow;
+import static c195_schedulingapp.utils.DB.getApptsByMonth;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.Month;
 import java.time.YearMonth;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -40,7 +48,7 @@ public class CalendarController implements Initializable {
     @FXML
     private TableView calendarTable;
     @FXML
-    private TableColumn calendarCol;
+    private TableColumn<AppointmentRow, String> calendarCol;
     @FXML
     private TableColumn week1col;
     @FXML
@@ -53,7 +61,9 @@ public class CalendarController implements Initializable {
     private TableColumn week5col;
     @FXML
     private VBox vbox;
-
+    
+    public static ObservableList<AppointmentRow> appts = FXCollections.observableArrayList();
+    
     @FXML
     public void openAppointments() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Appointments.fxml"));
@@ -95,15 +105,32 @@ public class CalendarController implements Initializable {
         );
     }
     
-    @FXML private void getMonth(){
+    @FXML private void getMonth() throws ClassNotFoundException, SQLException{
         calendarCol.setText(months.getSelectionModel().getSelectedItem().toString());
+        calendarCol.setCellValueFactory(cellData -> {return cellData.getValue().getContact();});
         calendarCol.setVisible(true);
         week1col.setVisible(false);
         week2col.setVisible(false);
         week3col.setVisible(false);
         week4col.setVisible(false);
         week5col.setVisible(false);
-        System.out.println(months.getSelectionModel().getSelectedItem().toString());
+        calendarTable.getItems().clear();
+        ResultSet rs = getApptsByMonth(months.getSelectionModel()
+                .getSelectedItem()
+                .toString());
+        System.out.println("MONTH: "+months.getSelectionModel().getSelectedItem().toString());
+        try{
+            while(rs.next()){
+                String id = String.valueOf(rs.getInt("appointmentid"));
+                AppointmentRow ar = new AppointmentRow();
+                ar.setAppointmentId(new ReadOnlyStringWrapper(id));
+                appts.add(ar);
+            }
+            calendarTable.setItems(appts);
+        }
+        catch (SQLException ex) {
+                System.out.println("Ex: "+ex);
+            }
     }
     
     private void printWeeks(int max){
