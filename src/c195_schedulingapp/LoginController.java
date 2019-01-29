@@ -11,11 +11,13 @@ import c195_schedulingapp.utils.DB;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -30,7 +32,15 @@ public class LoginController implements Initializable {
     @FXML private Button loginBtn;
     @FXML private ComboBox location;
     
+    private static ResourceBundle messages = null;
+    
+    public static void setBundle(){
+        Locale l = Locale.getDefault();
+        messages = ResourceBundle.getBundle("c195_schedulingapp.MessagesBundle_"+l, l);
+    }
+    
     @FXML public void login() throws ClassNotFoundException, SQLException, IOException{
+        setBundle();
         if(DB.loginAuth(username.getText(), password.getText())==true){
             state.setLocation(location.getSelectionModel().getSelectedItem().toString());
             Parent root = FXMLLoader.load(getClass().getResource("Customers.fxml"));
@@ -38,7 +48,7 @@ public class LoginController implements Initializable {
             appStage.setScene(scene);
             appStage.show();
         } else {
-            System.out.println("Login failed!");
+            JOptionPane.showMessageDialog(null, messages.getString("loginError"));
         }
     };
     
