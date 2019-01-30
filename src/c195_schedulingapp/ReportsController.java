@@ -106,17 +106,19 @@ public class ReportsController implements Initializable {
         ResultSet rs = getApptTypesByMonth();
         reportsList.clear();
         while(rs.next()){
-            String report = rs.getString(1)+"    -    "
-                        + rs.getString(2)+"    ||     "
-                        + rs.getString(3)+" || "
-                        + rs.getString(4)+" || "
-                        + rs.getString(5)+" || "
-                        + rs.getString(6)+" || "
-                        + rs.getString(7)+" || "
-                        + rs.getString(8)+" || "
-                        + rs.getString(9);
+            String formattedReport = String.format("%-5s \t %-5s \t %-10s \t %-10s \t %-20s \t %-5s \t %-5s \t %-10s \t %-10s", 
+                    rs.getString(1), 
+                    rs.getString(2), 
+                    rs.getString(3), 
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getString(7),
+                    rs.getString(8),
+                    rs.getString(9)
+            );
             ReportRow rr = new ReportRow(
-                    new ReadOnlyStringWrapper(report)
+                    new ReadOnlyStringWrapper(formattedReport)
             );
             reportsList.add(rr);
         }
@@ -129,11 +131,11 @@ public class ReportsController implements Initializable {
             reportsList.clear();
             while(rs.next()){
                 String report = rs.getString(1)+"    -    "
-                        + rs.getString(2)+"    ||     "
-                        + rs.getString(3)+" || "
-                        + rs.getString(4)+" || "
-                        + rs.getString(5)+" || "
-                        + rs.getString(6)+" || "
+                        + rs.getString(2)+"    |     "
+                        + rs.getString(3)+" | "
+                        + rs.getString(4)+" | "
+                        + rs.getString(5)+" | "
+                        + rs.getString(6)+" | "
                         + rs.getString(7);
                 ReportRow rr = new ReportRow(
                         new ReadOnlyStringWrapper(report)
