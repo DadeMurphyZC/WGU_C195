@@ -19,7 +19,10 @@ import static c195_schedulingapp.utils.TempDBAppointment.tempAppointment;
 import static c195_schedulingapp.C195_SchedulingApp.state;
 import c195_schedulingapp.Model.Appointment;
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -126,7 +129,7 @@ public class DB {
         conn = dbConnect();
         pstmt = conn.prepareStatement(
                 "SELECT * from appointment "
-                        + "WHERE month(start) = ?"
+                        + "WHERE monthname(start) = ?"
         );
         pstmt.setString(1, month);
         rs = pstmt.executeQuery();
@@ -190,9 +193,9 @@ public class DB {
             pstmt.setInt(3, 3);
             pstmt.setString(4, c.getAddress().getPostalCode());
             pstmt.setString(5, c.getAddress().getPhone());
-            pstmt.setDate(6, null);
-            pstmt.setString(7, "");
-            pstmt.setString(8, "");
+            pstmt.setTimestamp(6, Timestamp.from(Instant.now()));
+            pstmt.setString(7, "test");
+            pstmt.setString(8, "test");
             pstmt.executeUpdate();
             int newId = -1;
             ResultSet rsKeys = pstmt.getGeneratedKeys();
@@ -211,9 +214,9 @@ public class DB {
             pstmt2.setString(1, c.getCustomerName());
             pstmt2.setInt(2, newId);
             pstmt2.setInt(3, c.getActive());
-            pstmt2.setDate(4, null);
-            pstmt2.setString(5, "");
-            pstmt2.setString(6, "");
+            pstmt2.setTimestamp(4, Timestamp.from(Instant.now()));
+            pstmt2.setString(5, "test");
+            pstmt2.setString(6, "test");
             pstmt2.executeUpdate();
         }
     }
@@ -283,9 +286,9 @@ public class DB {
         pstmt.setString(6, a.getUrl());
         pstmt.setTimestamp(7, Timestamp.valueOf(a.getStart()));
         pstmt.setTimestamp(8, Timestamp.valueOf(a.getEnd()));
-        pstmt.setDate(9, null);
-        pstmt.setString(10, "");
-        pstmt.setString(11, "");
+        pstmt.setTimestamp(9, Timestamp.from(Instant.now()));
+        pstmt.setTimestamp(10, Timestamp.from(Instant.now()));
+        pstmt.setString(11, "test");
         pstmt.executeUpdate();
     }
     
