@@ -8,6 +8,7 @@ package c195_schedulingapp;
 import static c195_schedulingapp.C195_SchedulingApp.appStage;
 import c195_schedulingapp.utils.AppointmentRow;
 import static c195_schedulingapp.utils.DB.getApptsByMonth;
+import c195_schedulingapp.utils.ReportRow;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -48,7 +49,7 @@ public class CalendarController implements Initializable {
     @FXML
     private TableView calendarTable;
     @FXML
-    private TableColumn<AppointmentRow, String> calendarCol;
+    private TableColumn<ReportRow, String> calendarCol;
     @FXML
     private TableColumn week1col;
     @FXML
@@ -62,7 +63,7 @@ public class CalendarController implements Initializable {
     @FXML
     private VBox vbox;
     
-    public static ObservableList<AppointmentRow> appts = FXCollections.observableArrayList();
+    public static ObservableList<ReportRow> appts = FXCollections.observableArrayList();
     
     @FXML
     public void openAppointments() throws IOException {
@@ -106,32 +107,68 @@ public class CalendarController implements Initializable {
     }
     
     @FXML private void getMonth() throws ClassNotFoundException, SQLException{
-        calendarCol.setText(months.getSelectionModel().getSelectedItem().toString());
-        calendarCol.setCellValueFactory(cellData -> {return cellData.getValue().getContact();});
-        calendarCol.setVisible(true);
+        appts.clear();
+        try{
+            ResultSet rs = getApptsByMonth(months.getSelectionModel()
+                    .getSelectedItem()
+                    .toString());
+            calendarCol.setText(months.getSelectionModel().getSelectedItem().toString());
+            calendarCol.setCellValueFactory(cellData -> {
+                return cellData.getValue().getRow();
+            });
+            calendarCol.setVisible(true);
+            try {
+                while (rs.next()) {
+                    String id = "Appointment ID: "+rs.getString("appointmentId");
+                    String customer = "Customer ID: "+rs.getString("customerId");
+                    String start = "Date/Time: "+rs.getString("start");
+                    ReportRow ar = new ReportRow(new ReadOnlyStringWrapper(id+" "+customer+" "+start));
+                    appts.add(ar);
+                }
+                calendarTable.setItems(appts);
+            } catch (SQLException ex) {
+                System.out.println("Ex: " + ex);
+            }
+            
+        }
+        catch (ClassNotFoundException | SQLException ex) {System.out.println("Ex: "+ex);}
+        
         week1col.setVisible(false);
         week2col.setVisible(false);
         week3col.setVisible(false);
         week4col.setVisible(false);
         week5col.setVisible(false);
-        calendarTable.getItems().clear();
-        ResultSet rs = getApptsByMonth(months.getSelectionModel()
-                .getSelectedItem()
-                .toString());
-        System.out.println("MONTH: "+months.getSelectionModel().getSelectedItem().toString());
-        try{
-            while(rs.next()){
-                String id = String.valueOf(rs.getInt("appointmentid"));
-                AppointmentRow ar = new AppointmentRow();
-                ar.setAppointmentId(new ReadOnlyStringWrapper(id));
-                appts.add(ar);
-            }
-            calendarTable.setItems(appts);
-        }
-        catch (SQLException ex) {
-                System.out.println("Ex: "+ex);
-            }
+        
+        
     }
+    
+//    public void initialize(URL url, ResourceBundle rb) {
+//        customers.clear();     
+//        try{            
+//            ResultSet rs = getCustomers();
+//            nameCol.setCellValueFactory(cellData -> {return cellData.getValue().getcustomerName();});
+//            addressCol.setCellValueFactory(cellData -> {return cellData.getValue().getAddress();});
+//            phoneCol.setCellValueFactory(cellData -> {return cellData.getValue().getPhone();});
+//            try{
+//                while (rs.next()) {
+//                    String customerName = rs.getString("customerName");
+//                    String address = rs.getString("address");
+//                    String phone = rs.getString("phone");
+//                    TableRow tr = new TableRow(
+//                            new ReadOnlyStringWrapper(customerName),
+//                            new ReadOnlyStringWrapper(address),
+//                            new ReadOnlyStringWrapper(phone)
+//                    );
+//                    customers.add(tr);
+//                }
+//                customerTable.setItems(customers);
+//            } 
+//            catch (SQLException ex) {
+//                System.out.println("Ex: "+ex);
+//            }
+//        } 
+//        catch (ClassNotFoundException | SQLException ex) {System.out.println("Ex: "+ex);} 
+//    } 
     
     private void printWeeks(int max){
         String m = months.getSelectionModel().getSelectedItem().toString();
