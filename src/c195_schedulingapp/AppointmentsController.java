@@ -98,6 +98,7 @@ public class AppointmentsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        appointments.clear();
         try{
             ResultSet rs = getAppointments();
             idCol.setCellValueFactory(cellData -> {return cellData.getValue().getCustomerId();});
