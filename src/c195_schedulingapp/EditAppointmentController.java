@@ -39,7 +39,7 @@ public class EditAppointmentController implements Initializable {
     @FXML private ComboBox location;
     @FXML private ComboBox startTime;
     @FXML private ComboBox endTime;
-    @FXML private TextField title;
+    @FXML private ComboBox title;
     @FXML private DatePicker date;
     @FXML private Button save;
     @FXML private Button cancel;
@@ -78,12 +78,13 @@ public class EditAppointmentController implements Initializable {
     public void populateForm(){
         Appointment appt = state.getTempAppointment();
         contact.getSelectionModel().select(appt.getContact());
+        title.getSelectionModel().select(appt.getTitle());
         customer.getSelectionModel().select(appt.getCustomerid());
         description.getSelectionModel().select(appt.getDescription());
         location.getSelectionModel().select(appt.getLocation());
         date.setValue(LocalDate.parse(state.getTempAppointment().getStart().substring(0, 10)));
-        startTime.getSelectionModel().select(appt.getStart());
-        endTime.getSelectionModel().select(appt.getEnd());
+        startTime.getSelectionModel().select(appt.getStart().substring(11, appt.getStart().length()-3));
+        endTime.getSelectionModel().select(appt.getEnd().substring(11, appt.getEnd().length()-3));
     }
     
     /**
