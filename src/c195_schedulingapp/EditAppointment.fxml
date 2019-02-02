@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="160.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c195_schedulingapp.EditAppointmentController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="160.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="c195_schedulingapp.EditAppointmentController">
    <children>
       <SplitPane dividerPositions="0.1507537688442211" orientation="VERTICAL" prefHeight="500.0" prefWidth="350.0">
          <items>
@@ -28,7 +31,7 @@
                         <Label text="Customer" />
                         <ComboBox fx:id="customer" prefWidth="150.0" promptText="Customer" />
                         <Label text="Title" />
-                        <TextField fx:id="title" />
+                        <ComboBox fx:id="title" prefWidth="150.0" promptText="Title" />
                         <Label text="Description" />
                         <ComboBox fx:id="description" prefWidth="150.0" promptText="Description" />
                         <Label text="Location" />
