@@ -20,9 +20,7 @@ import static c195_schedulingapp.C195_SchedulingApp.state;
 import c195_schedulingapp.Model.Appointment;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -80,6 +78,22 @@ public class DB {
         return temp;
     }
     
+    public static String getCustomerName(int id) throws SQLException, ClassNotFoundException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "SELECT customerName "
+                        + "FROM customer"
+                        + "WHERE customerId = ?"
+        );
+        pstmt.setInt(1, id);
+        rs = pstmt.executeQuery();
+        String name = null;
+        while(rs.next()){
+            name = rs.getString("customerName");
+        }
+        return name;
+    }
+    
     public static Appointment searchAppointment(int id) throws ClassNotFoundException, SQLException{
         conn = dbConnect();
         pstmt = conn.prepareStatement("SELECT * from appointment "
@@ -132,6 +146,21 @@ public class DB {
                         + "WHERE monthname(start) = ?"
         );
         pstmt.setString(1, month);
+        rs = pstmt.executeQuery();
+        return rs;
+    }
+    
+    public static ResultSet getApptsByWeekRange(int start, int end, String month) throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "SELECT * from appointment "
+                        + "WHERE dayofmonth(start) between ? and ? "
+                        + "AND monthname(start) = ? "
+                        + "GROUP BY dayofmonth(start)"
+        );
+        pstmt.setInt(1, start);
+        pstmt.setInt(2, end);
+        pstmt.setString(3, month);
         rs = pstmt.executeQuery();
         return rs;
     }
