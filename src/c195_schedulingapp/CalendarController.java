@@ -6,20 +6,21 @@
 package c195_schedulingapp;
 
 import static c195_schedulingapp.C195_SchedulingApp.appStage;
-import c195_schedulingapp.utils.AppointmentRow;
 import static c195_schedulingapp.utils.DB.getApptsByMonth;
+import static c195_schedulingapp.utils.DB.getApptsByWeekRange;
 import c195_schedulingapp.utils.ReportRow;
+import c195_schedulingapp.utils.Week1Row;
+import c195_schedulingapp.utils.Week2Row;
+import c195_schedulingapp.utils.Week3Row;
+import c195_schedulingapp.utils.Week4Row;
+import c195_schedulingapp.utils.Week5Row;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Month;
-import java.time.YearMonth;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -51,19 +52,19 @@ public class CalendarController implements Initializable {
     @FXML
     private TableColumn<ReportRow, String> calendarCol;
     @FXML
-    private TableColumn week1col;
+    private TableColumn<ReportRow, String> week1col;
     @FXML
-    private TableColumn week2col;
+    private TableColumn<ReportRow, String> week2col;
     @FXML
-    private TableColumn week3col;
+    private TableColumn<ReportRow, String> week3col;
     @FXML
-    private TableColumn week4col;
+    private TableColumn<ReportRow, String> week4col;
     @FXML
-    private TableColumn week5col;
+    private TableColumn<ReportRow, String> week5col;
     @FXML
     private VBox vbox;
     
-    public static ObservableList<ReportRow> appts = FXCollections.observableArrayList();
+    public static ObservableList appts = FXCollections.observableArrayList();
     
     @FXML
     public void openAppointments() throws IOException {
@@ -100,7 +101,7 @@ public class CalendarController implements Initializable {
                 "July",
                 "August",
                 "September",
-                "Obtober",
+                "October",
                 "November",
                 "December"
         );
@@ -142,33 +143,7 @@ public class CalendarController implements Initializable {
         
     }
     
-//    public void initialize(URL url, ResourceBundle rb) {
-//        customers.clear();     
-//        try{            
-//            ResultSet rs = getCustomers();
-//            nameCol.setCellValueFactory(cellData -> {return cellData.getValue().getcustomerName();});
-//            addressCol.setCellValueFactory(cellData -> {return cellData.getValue().getAddress();});
-//            phoneCol.setCellValueFactory(cellData -> {return cellData.getValue().getPhone();});
-//            try{
-//                while (rs.next()) {
-//                    String customerName = rs.getString("customerName");
-//                    String address = rs.getString("address");
-//                    String phone = rs.getString("phone");
-//                    TableRow tr = new TableRow(
-//                            new ReadOnlyStringWrapper(customerName),
-//                            new ReadOnlyStringWrapper(address),
-//                            new ReadOnlyStringWrapper(phone)
-//                    );
-//                    customers.add(tr);
-//                }
-//                customerTable.setItems(customers);
-//            } 
-//            catch (SQLException ex) {
-//                System.out.println("Ex: "+ex);
-//            }
-//        } 
-//        catch (ClassNotFoundException | SQLException ex) {System.out.println("Ex: "+ex);} 
-//    } 
+
     
     private void printWeeks(int max){
         String m = months.getSelectionModel().getSelectedItem().toString();
@@ -193,16 +168,72 @@ public class CalendarController implements Initializable {
         }
     }
     
-    @FXML private void getWeek(){
+    @FXML private void getWeek() throws ClassNotFoundException, SQLException{
         calendarCol.setVisible(false);
         week1col.setVisible(true);
         week2col.setVisible(true);
         week3col.setVisible(true);
         week4col.setVisible(true);
         week5col.setVisible(true);
+        week1col.setCellValueFactory(cd->cd.getValue().getWeek1row());
+        week2col.setCellValueFactory(cd->cd.getValue().getWeek2row());
+        week3col.setCellValueFactory(cd->cd.getValue().getWeek3row());
+        week4col.setCellValueFactory(cd->cd.getValue().getWeek4row());
+        week5col.setCellValueFactory(cd->cd.getValue().getWeek5row());
+        appts.clear();
         String m = months.getSelectionModel().getSelectedItem().toString();
         int max = Month.valueOf(m.toUpperCase()).maxLength();
-        printWeeks(max);
+        ResultSet week1rs = getApptsByWeekRange(1,7,m);
+        ResultSet week2rs = getApptsByWeekRange(8,14,m);
+        ResultSet week3rs = getApptsByWeekRange(15,21,m);
+        ResultSet week4rs = getApptsByWeekRange(22,28,m);
+        ResultSet week5rs = getApptsByWeekRange(29,31,m);
+        try {
+            while(week1rs.next()){
+                ReportRow r = new ReportRow();
+                r.setWeek1row(new ReadOnlyStringWrapper(week1rs.getString("start")));
+                appts.add(r);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Ex: "+ex);
+        }
+        try {
+            while(week2rs.next()){
+                ReportRow r = new ReportRow();
+                r.setWeek2row(new ReadOnlyStringWrapper(week2rs.getString("start")));
+                appts.add(r);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Ex: "+ex);
+        }
+        try {
+            while(week3rs.next()){
+                ReportRow r = new ReportRow();
+                r.setWeek3row(new ReadOnlyStringWrapper(week3rs.getString("start")));
+                appts.add(r);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Ex: "+ex);
+        }
+        try {
+            while(week4rs.next()){
+                ReportRow r = new ReportRow();
+                r.setWeek4row(new ReadOnlyStringWrapper(week4rs.getString("start")));
+                appts.add(r);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Ex: "+ex);
+        }
+        try {
+            while(week5rs.next()){
+                ReportRow r = new ReportRow();
+                r.setWeek5row(new ReadOnlyStringWrapper(week5rs.getString("start")));
+                appts.add(r);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Ex: "+ex);
+        }
+        calendarTable.setItems(appts);
     }
 
     /**
