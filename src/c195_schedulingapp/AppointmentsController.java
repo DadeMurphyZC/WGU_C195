@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import c195_schedulingapp.utils.AppointmentRow;
 import static c195_schedulingapp.utils.DB.getAppointments;
 import static c195_schedulingapp.utils.DB.searchAppointment;
+import static c195_schedulingapp.utils.DB.deleteAppointment;
 import java.io.IOException;
 import java.sql.*;
 import java.sql.Date;
@@ -73,6 +74,16 @@ public class AppointmentsController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
+    }
+    
+        @FXML public void deleteAppt() throws ClassNotFoundException, SQLException{
+        state.clearTempCustomer();
+        selected = (AppointmentRow) appointmentsTable.getSelectionModel().getSelectedItem();
+        deleteAppointment(Integer.parseInt(selected.getAppointmentId().getValue()));
+        state.setTempIndex(appointmentsTable.getSelectionModel().getSelectedIndex());
+        appointments.remove(state.getTempIndex().intValue());
+        state.clearTempCustomer();
+        state.clearTempIndex();
     }
     
     private void loadAppointment() throws ClassNotFoundException, SQLException{
