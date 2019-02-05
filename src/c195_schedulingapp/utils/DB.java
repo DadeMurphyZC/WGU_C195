@@ -106,6 +106,16 @@ public class DB {
         }
         return temp;
     }
+    
+    public static void deleteAppointment(int id) throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "DELETE from appointment "
+                        + "WHERE appointmentId = ?"
+        );
+        pstmt.setInt(1, id);
+        pstmt.execute();
+    }
 
     public static ResultSet getCustomers() throws ClassNotFoundException, SQLException {
         conn = dbConnect();
@@ -333,14 +343,5 @@ public class DB {
             rs.updateRow();
         }
         if(pstmt!=null){pstmt.close();}
-    }
-    
-    public static void deleteAppointment(int id) throws ClassNotFoundException, SQLException{
-        conn = dbConnect();
-        pstmt = conn.prepareStatement(
-                "DELETE from appointment "
-                + "WHERE appointment.appointmentid = ?");
-        pstmt.setInt(1, id);
-        pstmt.execute();
     }
 }
