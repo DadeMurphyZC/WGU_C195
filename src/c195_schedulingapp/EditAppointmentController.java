@@ -10,10 +10,14 @@ import static c195_schedulingapp.C195_SchedulingApp.state;
 import static c195_schedulingapp.utils.DB.getCities;
 import static c195_schedulingapp.utils.DB.getCustomersArray;
 import static c195_schedulingapp.utils.DB.getUsers;
+import static c195_schedulingapp.utils.DB.updateAppointment;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -85,6 +89,29 @@ public class EditAppointmentController implements Initializable {
         date.setValue(LocalDate.parse(state.getTempAppointment().getStart().substring(0, 10)));
         startTime.getSelectionModel().select(appt.getStart().substring(11, appt.getStart().length()-3));
         endTime.getSelectionModel().select(appt.getEnd().substring(11, appt.getEnd().length()-3));
+    }
+    
+    @FXML private void updateAppt() throws ClassNotFoundException, SQLException{
+        LocalDateTime start = LocalDateTime.of(date.getValue(), LocalTime.parse(startTime.getValue().toString()));
+        String startFormatted = DateTimeFormatter
+                        .ofPattern("yyyy-MM-dd HH:mm:ss")
+                        .toFormat()
+                        .format(start);
+        
+        LocalDateTime end = LocalDateTime.of(date.getValue(), LocalTime.parse(endTime.getValue().toString()));
+        String endFormatted = DateTimeFormatter
+                        .ofPattern("yyyy-MM-dd HH:mm:ss")
+                        .toFormat()
+                        .format(end);
+        updateAppointment(
+                state.getTempAppointment().getAppointmentId(),
+                title.getSelectionModel().getSelectedItem().toString(),
+                description.getSelectionModel().getSelectedItem().toString(),
+                location.getSelectionModel().getSelectedItem().toString(),
+                contact.getSelectionModel().getSelectedItem().toString(),
+                Timestamp.valueOf(startFormatted),
+                Timestamp.valueOf(endFormatted)
+                );
     }
     
     /**
