@@ -5,6 +5,9 @@
  */
 package c195_schedulingapp.Model;
 
+import static c195_schedulingapp.utils.DB.getCityName;
+import java.sql.SQLException;
+
 public class Customer {
     private int addressId, active;
     private String customerName, address1, phone;
@@ -18,8 +21,7 @@ public class Customer {
         this.active = active;
         this.address = address;
         this.address1 = address.getAddress();
-        this.phone = address.getPhone();
-        
+        this.phone = address.getPhone(); 
     }
 
     public String getAddress1() {
@@ -73,6 +75,11 @@ public class Customer {
     @Override
     public String toString() {
         return customerName;
+    }
+    
+    public String getCity(int id) throws ClassNotFoundException, SQLException{
+        String city = getCityName(id);
+        return city;
     }
 
 }
