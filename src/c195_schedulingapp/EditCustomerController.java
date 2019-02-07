@@ -8,16 +8,22 @@ package c195_schedulingapp;
 import static c195_schedulingapp.C195_SchedulingApp.state;
 import static c195_schedulingapp.CustomersController.customers;
 import c195_schedulingapp.Model.Address;
+import static c195_schedulingapp.utils.DB.getCities;
+import static c195_schedulingapp.utils.DB.getCityName;
 import static c195_schedulingapp.utils.DB.updateCustomer;
 import c195_schedulingapp.utils.TableRow;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -32,13 +38,15 @@ public class EditCustomerController implements Initializable {
     @FXML private TextField name;
     @FXML private TextField address;
     @FXML private TextField address2;
-    @FXML private TextField city;
+    @FXML private ComboBox city;
     @FXML private TextField postalCode;
     @FXML private TextField phone;
     
+    HashMap options = new HashMap();
+    
     @FXML public synchronized void editCustomer() throws ClassNotFoundException, SQLException{
         state.getTempCustomer().setAddress(new Address(address.getText(),address2.getText(),1,postalCode.getText(),phone.getText()));
-        updateCustomer(state.getTempCustomer().getCustomerName(), name.getText());
+        updateCustomer(state.getTempCustomer().getCustomerName(), name.getText(), address.getText(), postalCode.getText(), phone.getText(), state.getTempCustomer().getAddressId());
         TableRow tr = new TableRow(
                             new SimpleStringProperty(name.getText()),
                             new SimpleStringProperty(address.getText()),
@@ -55,8 +63,7 @@ public class EditCustomerController implements Initializable {
         Stage stage = (Stage) saveBtn.getScene().getWindow();
         stage.close();
     }
-    
-    
+
     /**
      * Initializes the controller class.
      */
@@ -67,6 +74,11 @@ public class EditCustomerController implements Initializable {
         address2.setText(state.getTempCustomer().getAddress().getAddress2());
         postalCode.setText(state.getTempCustomer().getAddress().getPostalCode());
         phone.setText(state.getTempCustomer().getPhone());
+        city.getItems().clear();
+        try {options = getCities();} 
+        catch (ClassNotFoundException | SQLException ex) {System.out.println(ex);}
+        options.forEach((k,v)->city.getItems().add(v));
+        
     }    
     
 }
