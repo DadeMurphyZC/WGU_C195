@@ -31,12 +31,7 @@
                         <TextField fx:id="address" />
                         <Label text="Address 2" />
                         <TextField fx:id="address2" />
-                        <MenuButton mnemonicParsing="false" text="City">
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="Action 1" />
-                              <MenuItem mnemonicParsing="false" text="Action 2" />
-                           </items>
-                        </MenuButton>
+                        <ComboBox fx:id="city" prefWidth="150.0" promptText="City" />
                         <Label text="Postal Code" />
                         <TextField fx:id="postalCode" />
                         <Label text="Phone" />
