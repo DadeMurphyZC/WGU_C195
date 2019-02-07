@@ -356,17 +356,25 @@ public class DB {
         pstmt.executeUpdate();
     }
     
-    public static void updateAppointment(int id, int updatedId) throws ClassNotFoundException, SQLException{
+    public static void updateAppointment(int id, String title, String description, String location, String contact, Timestamp start, Timestamp end) throws ClassNotFoundException, SQLException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
-                "SELECT * FROM appointment "
-                + "WHERE appointment.appointmentid = ?", ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-        pstmt.setInt(1, id);
-        rs = pstmt.executeQuery();
-        while(rs.next()){
-            rs.updateInt("appointmentid", updatedId);
-            rs.updateRow();
-        }
-        if(pstmt!=null){pstmt.close();}
+                "UPDATE appointment "
+                        + "SET title = ?, "
+                        + "description = ?, "
+                        + "location = ?, "
+                        + "contact = ?, "
+                        + "start = ?, "
+                        + "end = ? "
+                        + "WHERE appointmentId = ?"
+        );
+        pstmt.setString(1, title);
+        pstmt.setString(2, description);
+        pstmt.setString(3, location);
+        pstmt.setString(4, contact);
+        pstmt.setTimestamp(5, start);
+        pstmt.setTimestamp(6, end);
+        pstmt.setInt(7, id);
+        pstmt.executeUpdate();
     }
 }
