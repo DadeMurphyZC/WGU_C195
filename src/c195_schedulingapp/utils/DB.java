@@ -247,8 +247,7 @@ public class DB {
             pstmt2 = conn.prepareStatement(
                     "INSERT INTO customer "
                     + "(customerName, addressId, active, createDate, createdBy, lastUpdateBy)"
-                    + "VALUES (?, ?, ?, ?, ?, ?)"
-                        );
+                    + "VALUES (?, ?, ?, ?, ?, ?)");
 
             pstmt2.setString(1, c.getCustomerName());
             pstmt2.setInt(2, newId);
@@ -260,19 +259,30 @@ public class DB {
         }
     }
     
-    public static void updateCustomer(String name, String updatedName) throws ClassNotFoundException, SQLException{
+    public static void updateCustomer(String name, String updated, String address, String postalCode, String phone, int id) throws ClassNotFoundException, SQLException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
-                "SELECT * FROM customer "
-                + "WHERE customer.customerName = ?", ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-        pstmt.setString(1, name);
-        rs = pstmt.executeQuery();
-        while(rs.next()){
-            rs.updateString("customerName", updatedName);
-            rs.updateRow();
-        }
-        if(pstmt!=null){pstmt.close();}
+                "UPDATE customer "
+                        + "SET customer.customerName = ? "
+                        + "WHERE customer.customerName = ?");
+        pstmt.setString(1, updated);
+        pstmt.setString(2, name);
+        pstmt.executeUpdate();
+        
+        pstmt2 = conn.prepareStatement(
+                "UPDATE address "
+                        + "SET address = ?, "
+                        + "postalCode = ?, "
+                        + "phone = ? "
+                        + "WHERE addressId = ?");
+        pstmt2.setString(1, address);
+        pstmt2.setString(2, postalCode);
+        pstmt2.setString(3, phone);
+        pstmt2.setInt(4, id);
+        pstmt2.executeUpdate();
+        
     }
+
         
     public static void deleteCustomer(String name) throws ClassNotFoundException, SQLException{
         conn = dbConnect();
@@ -295,6 +305,21 @@ public class DB {
             dbCities.put(rs.getString("cityid"), rs.getString("city"));
         }
         return dbCities;
+    }
+    
+    public static String getCityName(int id) throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "SELECT city from city "
+                        + "WHERE city.cityId = ?"
+        );
+        pstmt.setInt(1, id);
+        rs = pstmt.executeQuery();
+        String city = null;
+        while(rs.next()){
+            city = rs.getString("city");
+        }
+        return city;
     }
     
     public static HashMap getUsers() throws ClassNotFoundException, SQLException{
