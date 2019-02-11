@@ -67,6 +67,7 @@ public class AddAppointmentController implements Initializable {
         contactOptions = getUsers();
         customerOptions = getCustomersArray();
         locationOptions = getCities();
+        //LAMBDA EXPRESSION USED IN forEach AS A for loop ALTERNATIVE
         contactOptions.forEach((k,v)->contact.getItems().add(v));
         customerOptions.forEach((c)->customer.getItems().add(c));
         descriptionOptions.forEach((d)->description.getItems().add(d));
