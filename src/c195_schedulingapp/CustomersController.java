@@ -16,12 +16,9 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.TimeZone;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,56 +36,70 @@ import javafx.stage.Stage;
  * @author cfonseca
  */
 public class CustomersController implements Initializable {
-    @FXML private Button createCustomerBtn;
-    @FXML private Button editCustomerBtn;
-    @FXML private Button deleteCustomerBtn;
-    @FXML private Button apptBtn;
-    @FXML private TableView customerTable;
-    @FXML private TableColumn<TableRow, String> nameCol;
-    @FXML private TableColumn<TableRow, String> addressCol;
-    @FXML private TableColumn<TableRow, String> phoneCol;
+
+    @FXML
+    private Button createCustomerBtn;
+    @FXML
+    private Button editCustomerBtn;
+    @FXML
+    private Button deleteCustomerBtn;
+    @FXML
+    private Button apptBtn;
+    @FXML
+    private TableView customerTable;
+    @FXML
+    private TableColumn<TableRow, String> nameCol;
+    @FXML
+    private TableColumn<TableRow, String> addressCol;
+    @FXML
+    private TableColumn<TableRow, String> phoneCol;
     public static TableRow selected = new TableRow();
 
     public static ObservableList<TableRow> customers = FXCollections.observableArrayList();
-    
-    @FXML public void openAppointments() throws IOException{
+
+    @FXML
+    public void openAppointments() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Appointments.fxml"));
         Scene scene = new Scene(root);
         appStage.setScene(scene);
         appStage.show();
     }
-    
-    @FXML public void openReports() throws IOException{
+
+    @FXML
+    public void openReports() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Reports.fxml"));
         Scene scene = new Scene(root);
         appStage.setScene(scene);
         appStage.show();
     }
-    
-    @FXML public void openCalendar() throws IOException{
+
+    @FXML
+    public void openCalendar() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Calendar.fxml"));
         Scene scene = new Scene(root);
         appStage.setScene(scene);
         appStage.show();
     }
-    
-    @FXML public void createCustomer() throws IOException{
+
+    @FXML
+    public void createCustomer() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("AddCustomer.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
     }
-    
-    protected void loadCustomer() throws ClassNotFoundException, SQLException{
+
+    protected void loadCustomer() throws ClassNotFoundException, SQLException {
         state.clearTempCustomer();
         state.clearTempIndex();
         selected = (TableRow) customerTable.getSelectionModel().getSelectedItem();
-        System.out.println("Selected: "+selected.getcustomerName());
+        System.out.println("Selected: " + selected.getcustomerName());
         state.setTempCustomer(DB.searchCustomer(selected.getcustomerName().getValue()));
     }
-    
-    @FXML public void editCustomer() throws IOException, ClassNotFoundException, SQLException{
+
+    @FXML
+    public void editCustomer() throws IOException, ClassNotFoundException, SQLException {
         loadCustomer();
         state.setTempIndex(customerTable.getSelectionModel().getSelectedIndex());
         Parent root = FXMLLoader.load(getClass().getResource("EditCustomer.fxml"));
@@ -97,8 +108,9 @@ public class CustomersController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
-    @FXML public void deleteCustomer() throws ClassNotFoundException, SQLException{
+
+    @FXML
+    public void deleteCustomer() throws ClassNotFoundException, SQLException {
         state.clearTempCustomer();
         selected = (TableRow) customerTable.getSelectionModel().getSelectedItem();
         DB.deleteCustomer(selected.getcustomerName().getValue());
@@ -107,19 +119,26 @@ public class CustomersController implements Initializable {
         state.clearTempCustomer();
         state.clearTempIndex();
     }
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        customers.clear();     
-        try{            
+        TimeZone.setDefault(TimeZone.getTimeZone(state.getLocation()));
+        customers.clear();
+        try {
             ResultSet rs = getCustomers();
-            nameCol.setCellValueFactory(cellData -> {return cellData.getValue().getcustomerName();});
-            addressCol.setCellValueFactory(cellData -> {return cellData.getValue().getAddress();});
-            phoneCol.setCellValueFactory(cellData -> {return cellData.getValue().getPhone();});
-            try{
+            nameCol.setCellValueFactory(cellData -> {
+                return cellData.getValue().getcustomerName();
+            });
+            addressCol.setCellValueFactory(cellData -> {
+                return cellData.getValue().getAddress();
+            });
+            phoneCol.setCellValueFactory(cellData -> {
+                return cellData.getValue().getPhone();
+            });
+            try {
                 while (rs.next()) {
                     String customerName = rs.getString("customerName");
                     String address = rs.getString("address");
@@ -132,11 +151,11 @@ public class CustomersController implements Initializable {
                     customers.add(tr);
                 }
                 customerTable.setItems(customers);
-            } 
-            catch (SQLException ex) {
-                System.out.println("Ex: "+ex);
+            } catch (SQLException ex) {
+                System.out.println("Ex: " + ex);
             }
-        } 
-        catch (ClassNotFoundException | SQLException ex) {System.out.println("Ex: "+ex);} 
-    } 
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println("Ex: " + ex);
+        }
+    }
 }
