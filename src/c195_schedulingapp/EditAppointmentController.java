@@ -5,8 +5,10 @@
  */
 package c195_schedulingapp;
 
+import static c195_schedulingapp.AppointmentsController.appointments;
 import c195_schedulingapp.Model.Appointment;
 import static c195_schedulingapp.C195_SchedulingApp.state;
+import c195_schedulingapp.utils.AppointmentRow;
 import static c195_schedulingapp.utils.DB.getCities;
 import static c195_schedulingapp.utils.DB.getCustomersArray;
 import static c195_schedulingapp.utils.DB.getUsers;
@@ -21,14 +23,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -112,6 +113,23 @@ public class EditAppointmentController implements Initializable {
                 Timestamp.valueOf(startFormatted),
                 Timestamp.valueOf(endFormatted)
                 );
+        AppointmentRow ar = new AppointmentRow();
+        ar.setContact(new SimpleStringProperty(contact.getSelectionModel().getSelectedItem().toString()));
+        ar.setDescription(new SimpleStringProperty(description.getSelectionModel().getSelectedItem().toString()));
+        ar.setEnd(new SimpleStringProperty(Timestamp.valueOf(end).toString()));
+        ar.setLocation(new SimpleStringProperty(location.getSelectionModel().getSelectedItem().toString()));
+        ar.setStart(new SimpleStringProperty(Timestamp.valueOf(start).toString()));
+        ar.setTitle(new SimpleStringProperty(title.getSelectionModel().getSelectedItem().toString()));
+        appointments.set(state.getTempIndex(), ar);
+        state.clearTempCustomer();
+        state.clearTempIndex();
+        Stage stage = (Stage) save.getScene().getWindow();
+        stage.close();
+    }
+    
+    @FXML public void cancel(){
+        Stage stage = (Stage) save.getScene().getWindow();
+        stage.close();
     }
     
     /**
