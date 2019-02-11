@@ -62,6 +62,7 @@ public class LoginController implements Initializable {
         if(!location.getItems().isEmpty()){location.getItems().clear();}
         location.getItems().add("America/New_York");
         location.getItems().add("America/Phoenix");
+        location.getItems().add("America/Los_Angeles");
         location.getItems().add("Europe/London");
         location.getItems().add("Online");
     }    
