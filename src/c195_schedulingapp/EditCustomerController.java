@@ -9,16 +9,12 @@ import static c195_schedulingapp.C195_SchedulingApp.state;
 import static c195_schedulingapp.CustomersController.customers;
 import c195_schedulingapp.Model.Address;
 import static c195_schedulingapp.utils.DB.getCities;
-import static c195_schedulingapp.utils.DB.getCityName;
 import static c195_schedulingapp.utils.DB.updateCustomer;
 import c195_schedulingapp.utils.TableRow;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -75,10 +71,11 @@ public class EditCustomerController implements Initializable {
         postalCode.setText(state.getTempCustomer().getAddress().getPostalCode());
         phone.setText(state.getTempCustomer().getPhone());
         city.getItems().clear();
-        try {options = getCities();} 
+        try {options = getCities();}
         catch (ClassNotFoundException | SQLException ex) {System.out.println(ex);}
+        try {city.getSelectionModel().select(state.getTempCustomer().getCity(state.getTempCustomer().getAddress().getCityId()));
+        } catch (ClassNotFoundException | SQLException ex) {System.out.println(ex);}
         options.forEach((k,v)->city.getItems().add(v));
-        
     }    
     
 }
