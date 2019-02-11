@@ -16,8 +16,6 @@ import static c195_schedulingapp.utils.DB.searchAppointment;
 import static c195_schedulingapp.utils.DB.deleteAppointment;
 import java.io.IOException;
 import java.sql.*;
-import java.sql.Date;
-import java.time.LocalDate;
 import javafx.beans.property.*;
 import javafx.collections.*;
 import javafx.fxml.*;
@@ -112,6 +110,7 @@ public class AppointmentsController implements Initializable {
         appointments.clear();
         try{
             ResultSet rs = getAppointments();
+            //LAMBDA EXPRESSIONS USED TO SET CELL VALUE FACTORIES
             idCol.setCellValueFactory(cellData -> {return cellData.getValue().getCustomerId();});
             customerCol.setCellValueFactory(cellData -> {return cellData.getValue().getCustomerId();});
             titleCol.setCellValueFactory(cellData -> {return cellData.getValue().getTitle();});
