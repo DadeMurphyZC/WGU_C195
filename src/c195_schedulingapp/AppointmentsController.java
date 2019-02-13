@@ -142,14 +142,16 @@ public class AppointmentsController implements Initializable {
                     String description = rs.getString("description");
                     String location = rs.getString("location");
                     String contact = rs.getString("contact");
-                    //Customer tempC = searchCustomer(getCustomerName(Integer.parseInt(customerId)));
+                    Customer tempC = searchCustomer(getCustomerName(Integer.parseInt(customerId)));
                     
                     Button _url = new Button();
                     _url.setText("Get Customer");
                     JOptionPane pane = new JOptionPane();
                     _url.setOnAction((ActionEvent e) -> {
                         try {
-                            pane.showMessageDialog(null, "Customer Name: "+getCustomerName(Integer.parseInt(customerId))+"\nCustomer Address: "+"\nCustomer Phone: ");
+                            pane.showMessageDialog(null, "Customer Name: "+getCustomerName(Integer.parseInt(customerId))
+                                    +"\nCustomer Address: "+tempC.getAddress().getAddress()
+                                    +"\nCustomer Phone: "+tempC.getPhone());
                         } catch (SQLException ex) {
                             Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, ex);
                         } catch (ClassNotFoundException ex) {
