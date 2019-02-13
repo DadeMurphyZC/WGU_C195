@@ -8,11 +8,16 @@ package c195_schedulingapp;
 import static c195_schedulingapp.C195_SchedulingApp.appStage;
 import static c195_schedulingapp.C195_SchedulingApp.state;
 import c195_schedulingapp.utils.DB;
+import static c195_schedulingapp.utils.DB.getApptAlert;
+import static c195_schedulingapp.utils.DB.getCustomerName;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -50,7 +55,11 @@ public class LoginController implements Initializable {
         } else {
             JOptionPane.showMessageDialog(null, messages.getString("loginError"));
         }
-    };
+        if(getApptAlert()!=null){
+        JOptionPane pane = new JOptionPane();
+            pane.showMessageDialog(null, "Appointment reminder!\n"+getApptAlert());
+        };
+    }
     
     /**
      * Initializes the controller class.
