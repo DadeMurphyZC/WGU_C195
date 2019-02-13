@@ -18,7 +18,9 @@ import static c195_schedulingapp.utils.TempDBCustomer.tempCustomer;
 import static c195_schedulingapp.utils.TempDBAppointment.tempAppointment;
 import static c195_schedulingapp.C195_SchedulingApp.state;
 import c195_schedulingapp.Model.Appointment;
+import java.util.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -173,6 +175,20 @@ public class DB {
         pstmt.setString(3, month);
         rs = pstmt.executeQuery();
         return rs;
+    }
+    
+    public static String getApptAlert() throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "SELECT * from appointment "
+                        + "WHERE timediff(?, start) < 15"
+        );
+        String timeStamp = new Timestamp(System.currentTimeMillis()).toString();
+        pstmt.setTimestamp(1, Timestamp.valueOf(timeStamp));
+        rs = pstmt.executeQuery();
+        String alertMessage = null;
+        while(rs.next()){alertMessage=rs.getString("start");}
+        return alertMessage;
     }
     
     public static ResultSet getApptsByUser() throws ClassNotFoundException, SQLException{
