@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
 import static c195_schedulingapp.AppointmentsController.appointments;
+import javafx.beans.property.SimpleObjectProperty;
 /**
  * FXML Controller class
  *
@@ -107,7 +108,7 @@ public class AddAppointmentController implements Initializable {
                             new SimpleStringProperty(a.getDescription()),
                             new SimpleStringProperty(a.getLocation()),
                             new SimpleStringProperty(a.getContact()),
-                            new SimpleStringProperty(a.getUrl()),
+                            new SimpleObjectProperty(a.getUrl()),
                             new SimpleStringProperty(a.getStart()),
                             new SimpleStringProperty(a.getEnd())
         );
