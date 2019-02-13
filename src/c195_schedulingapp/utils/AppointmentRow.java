@@ -8,6 +8,7 @@ package c195_schedulingapp.utils;
 import c195_schedulingapp.Model.Appointment;
 import java.sql.Time;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -20,11 +21,11 @@ public class AppointmentRow {
     private ObservableValue<String> description;
     private ObservableValue<String> location;
     private ObservableValue<String> contact;
-    private ObservableValue<String> url;
+    private ObservableValue<Button> url;
     private ObservableValue<String> start;
     private ObservableValue<String> end;
 
-        public AppointmentRow(ObservableValue<String> appointmentId, ObservableValue<String> customerId, ObservableValue<String> title, ObservableValue<String> description, ObservableValue<String> location, ObservableValue<String> contact, ObservableValue<String> url, ObservableValue<String> start, ObservableValue<String> end) {
+        public AppointmentRow(ObservableValue<String> appointmentId, ObservableValue<String> customerId, ObservableValue<String> title, ObservableValue<String> description, ObservableValue<String> location, ObservableValue<String> contact, ObservableValue<Button> url, ObservableValue<String> start, ObservableValue<String> end) {
             this.appointmentId = appointmentId;
             this.customerId = customerId;
             this.title = title;
@@ -87,11 +88,11 @@ public class AppointmentRow {
             this.contact = contact;
         }
 
-        public ObservableValue<String> getUrl() {
+        public ObservableValue<Button> getUrl() {
             return url;
         }
 
-        public void setUrl(ObservableValue<String> url) {
+        public void setUrl(ObservableValue<Button> url) {
             this.url = url;
         }
 
