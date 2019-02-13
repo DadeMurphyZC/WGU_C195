@@ -82,7 +82,7 @@ public class DB {
         conn = dbConnect();
         pstmt = conn.prepareStatement(
                 "SELECT customerName "
-                        + "FROM customer"
+                        + "FROM customer "
                         + "WHERE customerId = ?"
         );
         pstmt.setInt(1, id);
