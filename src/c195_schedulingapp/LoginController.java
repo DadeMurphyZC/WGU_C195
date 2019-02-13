@@ -10,9 +10,13 @@ import static c195_schedulingapp.C195_SchedulingApp.state;
 import c195_schedulingapp.utils.DB;
 import static c195_schedulingapp.utils.DB.getApptAlert;
 import static c195_schedulingapp.utils.DB.getCustomerName;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -59,6 +63,11 @@ public class LoginController implements Initializable {
         JOptionPane pane = new JOptionPane();
             pane.showMessageDialog(null, "Appointment reminder!\n"+getApptAlert());
         };
+        FileWriter fs = new FileWriter("c195_schedulingapp.utils.log", true);
+        BufferedWriter out = new BufferedWriter(fs);
+        out.write("Login successful: "+username.getText()+" "+location.getSelectionModel().getSelectedItem().toString()+" "+Timestamp.from(Instant.now()));
+        out.newLine();
+        out.close();
     }
     
     /**
