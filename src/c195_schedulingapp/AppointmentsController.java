@@ -7,6 +7,8 @@ package c195_schedulingapp;
 
 import static c195_schedulingapp.C195_SchedulingApp.appStage;
 import static c195_schedulingapp.C195_SchedulingApp.state;
+import c195_schedulingapp.Model.Appointment;
+import c195_schedulingapp.Model.Customer;
 import java.net.URL;
 import java.util.*;
 import javafx.fxml.Initializable;
@@ -14,14 +16,24 @@ import c195_schedulingapp.utils.AppointmentRow;
 import static c195_schedulingapp.utils.DB.getAppointments;
 import static c195_schedulingapp.utils.DB.searchAppointment;
 import static c195_schedulingapp.utils.DB.deleteAppointment;
+import static c195_schedulingapp.utils.DB.getCustomerName;
+import static c195_schedulingapp.utils.DB.searchCustomer;
 import java.io.IOException;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.*;
 import javafx.collections.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.*;
+import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -36,7 +48,7 @@ public class AppointmentsController implements Initializable {
     @FXML private TableColumn<AppointmentRow, String> descriptionCol;
     @FXML private TableColumn<AppointmentRow, String> locationCol;
     @FXML private TableColumn<AppointmentRow, String> contactCol;
-    @FXML private TableColumn<AppointmentRow, String> urlCol;
+    @FXML private TableColumn<AppointmentRow, Button> urlCol;
     @FXML private TableColumn<AppointmentRow, String> startCol;
     @FXML private TableColumn<AppointmentRow, String> endCol;
     @FXML private TableView appointmentsTable;
@@ -102,6 +114,8 @@ public class AppointmentsController implements Initializable {
         stage.show();
     }
     
+    public static Button btn = new Button();
+    
     /**
      * Initializes the controller class.
      */
@@ -117,6 +131,7 @@ public class AppointmentsController implements Initializable {
             descriptionCol.setCellValueFactory(cellData -> {return cellData.getValue().getDescription();});
             locationCol.setCellValueFactory(cellData -> {return cellData.getValue().getLocation();});
             contactCol.setCellValueFactory(cellData -> {return cellData.getValue().getContact();});
+            urlCol.setCellValueFactory(cd -> {return cd.getValue().getUrl();});
             startCol.setCellValueFactory(cellData -> {return cellData.getValue().getStart();});
             endCol.setCellValueFactory(cellData -> {return cellData.getValue().getEnd();});
             try{
@@ -127,7 +142,20 @@ public class AppointmentsController implements Initializable {
                     String description = rs.getString("description");
                     String location = rs.getString("location");
                     String contact = rs.getString("contact");
-                    String _url = rs.getString("url");
+                    //Customer tempC = searchCustomer(getCustomerName(Integer.parseInt(customerId)));
+                    
+                    Button _url = new Button();
+                    _url.setText("Get Customer");
+                    JOptionPane pane = new JOptionPane();
+                    _url.setOnAction((ActionEvent e) -> {
+                        try {
+                            pane.showMessageDialog(null, "Customer Name: "+getCustomerName(Integer.parseInt(customerId))+"\nCustomer Address: "+"\nCustomer Phone: ");
+                        } catch (SQLException ex) {
+                            Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    });
                     Time start = rs.getTime("start");
                     Time end = rs.getTime("end");
                     AppointmentRow tr = new AppointmentRow(
@@ -137,13 +165,14 @@ public class AppointmentsController implements Initializable {
                             new ReadOnlyStringWrapper(description),
                             new ReadOnlyStringWrapper(location),
                             new ReadOnlyStringWrapper(contact),
-                            new ReadOnlyStringWrapper(_url),
+                            new ReadOnlyObjectWrapper(_url),
                             new ReadOnlyObjectWrapper(start),
                             new ReadOnlyObjectWrapper(end)
                     );
                     appointments.add(tr);
                 }
                 appointmentsTable.setItems(appointments);
+                
             } catch (SQLException ex) {
                 System.out.println(ex.getStackTrace().toString());
             }
