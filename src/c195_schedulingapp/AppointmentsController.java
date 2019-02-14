@@ -7,7 +7,6 @@ package c195_schedulingapp;
 
 import static c195_schedulingapp.C195_SchedulingApp.appStage;
 import static c195_schedulingapp.C195_SchedulingApp.state;
-import c195_schedulingapp.Model.Appointment;
 import c195_schedulingapp.Model.Customer;
 import java.net.URL;
 import java.util.*;
@@ -25,14 +24,11 @@ import java.util.logging.Logger;
 import javafx.beans.property.*;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.*;
-import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -54,8 +50,8 @@ public class AppointmentsController implements Initializable {
     @FXML private TableView appointmentsTable;
     @FXML private Button customersBtn;
     public static AppointmentRow selected = new AppointmentRow();
-    
     public static ObservableList<AppointmentRow> appointments = FXCollections.observableArrayList();
+    public static Customer tempC = null;
     
     @FXML public void openCustomers() throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("Customers.fxml"));
@@ -142,8 +138,7 @@ public class AppointmentsController implements Initializable {
                     String description = rs.getString("description");
                     String location = rs.getString("location");
                     String contact = rs.getString("contact");
-                    Customer tempC = searchCustomer(getCustomerName(Integer.parseInt(customerId)));
-                    
+                    tempC = searchCustomer(getCustomerName(Integer.parseInt(customerId)));
                     Button _url = new Button();
                     _url.setText("Get Customer");
                     JOptionPane pane = new JOptionPane();
@@ -151,10 +146,8 @@ public class AppointmentsController implements Initializable {
                         try {
                             pane.showMessageDialog(null, "Customer Name: "+getCustomerName(Integer.parseInt(customerId))
                                     +"\nCustomer Address: "+tempC.getAddress().getAddress()
-                                    +"\nCustomer Phone: "+tempC.getPhone());
-                        } catch (SQLException ex) {
-                            Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (ClassNotFoundException ex) {
+                                    +"\nCustomer Phone: "+tempC.getAddress().getPhone());
+                        } catch (SQLException | ClassNotFoundException ex) {
                             Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     });
@@ -176,10 +169,10 @@ public class AppointmentsController implements Initializable {
                 appointmentsTable.setItems(appointments);
                 
             } catch (SQLException ex) {
-                System.out.println(ex.getStackTrace().toString());
+                System.out.println(ex);
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println(ex.getStackTrace().toString());
+            System.out.println(ex);
         }
     }    
     
