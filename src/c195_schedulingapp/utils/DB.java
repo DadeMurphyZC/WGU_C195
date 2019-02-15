@@ -151,6 +151,18 @@ public class DB {
         return rs;
     }
     
+    public static HashMap getApptStartTimes() throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "SELECT hour(start) as start, hour(end) as end from appointment"
+        );
+        rs = pstmt.executeQuery();
+        HashMap startTimes = new HashMap();
+        while(rs.next()){startTimes.put(rs.getInt("start"), rs.getInt("end"));};
+        return startTimes;
+    }
+
+    
     public static ResultSet getApptsByMonth(String month) throws ClassNotFoundException, SQLException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
@@ -168,7 +180,7 @@ public class DB {
                 "SELECT * from appointment "
                         + "WHERE dayofmonth(start) between ? and ? "
                         + "AND monthname(start) = ? "
-                        + "GROUP BY dayofmonth(start)"
+                        + "ORDER BY dayofmonth(start)"
         );
         pstmt.setInt(1, start);
         pstmt.setInt(2, end);
