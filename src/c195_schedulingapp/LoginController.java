@@ -63,7 +63,7 @@ public class LoginController implements Initializable {
         JOptionPane pane = new JOptionPane();
             pane.showMessageDialog(null, "Appointment reminder!\n"+getApptAlert());
         };
-        FileWriter fs = new FileWriter("c195_schedulingapp.utils.log", true);
+        FileWriter fs = new FileWriter("src\\c195_schedulingapp\\utils\\log.txt", true);
         BufferedWriter out = new BufferedWriter(fs);
         out.write("Login successful: "+username.getText()+" "+location.getSelectionModel().getSelectedItem().toString()+" "+Timestamp.from(Instant.now()));
         out.newLine();
