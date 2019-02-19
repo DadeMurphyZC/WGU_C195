@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import c195_schedulingapp.utils.TableRow;
 import java.util.HashMap;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
@@ -48,6 +49,7 @@ public class AddCustomerController implements Initializable {
         state.getTempCustomer().setAddress(new Address(address.getText(),address2.getText(),1,postalCode.getText(),phone.getText()));
         DB.addCustomerToDB(state.getTempCustomer());
         TableRow tr = new TableRow(
+                            new SimpleObjectProperty(state.getTempCustomer().getCustomerId()),
                             new SimpleStringProperty(state.getTempCustomer().getCustomerName()),
                             new SimpleStringProperty(state.getTempCustomer().getAddress().getAddress()),
                             new SimpleStringProperty(state.getTempCustomer().getAddress().getPhone())
