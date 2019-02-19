@@ -15,6 +15,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -44,6 +45,7 @@ public class EditCustomerController implements Initializable {
         state.getTempCustomer().setAddress(new Address(address.getText(),address2.getText(),1,postalCode.getText(),phone.getText()));
         updateCustomer(state.getTempCustomer().getCustomerName(), name.getText(), address.getText(), postalCode.getText(), phone.getText(), state.getTempCustomer().getAddressId());
         TableRow tr = new TableRow(
+                            new SimpleObjectProperty(state.getTempCustomer().getCustomerId()),
                             new SimpleStringProperty(name.getText()),
                             new SimpleStringProperty(address.getText()),
                             new SimpleStringProperty(phone.getText())
