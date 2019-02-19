@@ -26,6 +26,7 @@
       </Pane>
       <TableView fx:id="customerTable" layoutY="102.0" prefHeight="666.0" prefWidth="1024.0">
         <columns>
+            <TableColumn fx:id="idCol" prefWidth="75.0" text="Id" />
           <TableColumn fx:id="nameCol" prefWidth="342.0" text="Name" />
           <TableColumn fx:id="addressCol" prefWidth="342.0" text="Address" />
             <TableColumn fx:id="phoneCol" prefWidth="342.0" text="Phone" />
