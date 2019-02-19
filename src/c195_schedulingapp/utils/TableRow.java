@@ -12,11 +12,13 @@ import javafx.beans.value.ObservableValue;
  * @author cfonseca
  */
 public class TableRow {
+    private ObservableValue<String> customerId;
     private ObservableValue<String> customerName;
     private ObservableValue<String> address;
     private ObservableValue<String> phone;
     
-    public TableRow(ObservableValue<String> customerName, ObservableValue<String> address, ObservableValue<String> phone) {
+    public TableRow(ObservableValue<String> customerId, ObservableValue<String> customerName, ObservableValue<String> address, ObservableValue<String> phone) {
+        this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
         this.phone = phone;
@@ -28,6 +30,14 @@ public class TableRow {
     @Override
     public String toString() {
         return "TableRow{" + "customerName=" + customerName + '}';
+    }
+
+    public ObservableValue<String> getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(ObservableValue<String> customerId) {
+        this.customerId = customerId;
     }
     
     public ObservableValue<String> getcustomerName() {
