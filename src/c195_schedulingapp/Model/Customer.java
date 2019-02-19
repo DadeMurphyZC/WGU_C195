@@ -9,14 +9,15 @@ import static c195_schedulingapp.utils.DB.getCityName;
 import java.sql.SQLException;
 
 public class Customer {
-    private int addressId, active;
+    private int addressId, active, customerId;
     private String customerName, address1, phone;
     private Address address;
     
     public Customer(){};
 
-    public Customer(String customerName, int addressId, int active, Address address) {
+    public Customer(String customerName, int customerId, int addressId, int active, Address address) {
         this.customerName = customerName;
+        this.customerId = customerId;
         this.addressId = addressId;
         this.active = active;
         this.address = address;
@@ -32,6 +33,16 @@ public class Customer {
         this.address1 = address1;
     }
 
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+    
+    
+    
     public String getPhone() {
         return phone;
     }
