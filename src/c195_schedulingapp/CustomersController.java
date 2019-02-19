@@ -48,6 +48,8 @@ public class CustomersController implements Initializable {
     @FXML
     private TableView customerTable;
     @FXML
+    private TableColumn<TableRow, String> idCol;
+    @FXML
     private TableColumn<TableRow, String> nameCol;
     @FXML
     private TableColumn<TableRow, String> addressCol;
@@ -129,6 +131,9 @@ public class CustomersController implements Initializable {
         customers.clear();
         try {
             ResultSet rs = getCustomers();
+            idCol.setCellValueFactory(cellData -> {
+                return cellData.getValue().getCustomerId();
+            });
             nameCol.setCellValueFactory(cellData -> {
                 return cellData.getValue().getcustomerName();
             });
@@ -140,10 +145,12 @@ public class CustomersController implements Initializable {
             });
             try {
                 while (rs.next()) {
+                    String customerId = rs.getString("customerId");
                     String customerName = rs.getString("customerName");
                     String address = rs.getString("address");
                     String phone = rs.getString("phone");
                     TableRow tr = new TableRow(
+                            new ReadOnlyStringWrapper(customerId),
                             new ReadOnlyStringWrapper(customerName),
                             new ReadOnlyStringWrapper(address),
                             new ReadOnlyStringWrapper(phone)
