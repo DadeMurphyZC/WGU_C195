@@ -121,7 +121,7 @@ public class AppointmentsController implements Initializable {
         try{
             ResultSet rs = getAppointments();
             //LAMBDA EXPRESSIONS USED TO SET CELL VALUE FACTORIES
-            idCol.setCellValueFactory(cellData -> {return cellData.getValue().getCustomerId();});
+            idCol.setCellValueFactory(cellData -> {return cellData.getValue().getAppointmentId();});
             customerCol.setCellValueFactory(cellData -> {return cellData.getValue().getCustomerId();});
             titleCol.setCellValueFactory(cellData -> {return cellData.getValue().getTitle();});
             descriptionCol.setCellValueFactory(cellData -> {return cellData.getValue().getDescription();});
