@@ -96,6 +96,22 @@ public class DB {
         return name;
     }
     
+    public static int getCustomerId(String name)throws SQLException, ClassNotFoundException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "SELECT customerId "
+                        + "FROM customer "
+                        + "WHERE customer.customerName = ?"
+        );
+        pstmt.setString(1, name);
+        rs = pstmt.executeQuery();
+        int id = 0;
+        while(rs.next()){
+            id = rs.getInt("customerId");
+        }
+        return id;
+    }
+    
     public static Appointment searchAppointment(int id) throws ClassNotFoundException, SQLException{
         conn = dbConnect();
         pstmt = conn.prepareStatement("SELECT * from appointment "
@@ -379,7 +395,7 @@ public class DB {
         pstmt.setTimestamp(7, Timestamp.valueOf(a.getStart()));
         pstmt.setTimestamp(8, Timestamp.valueOf(a.getEnd()));
         pstmt.setTimestamp(9, Timestamp.from(Instant.now()));
-        pstmt.setTimestamp(10, Timestamp.from(Instant.now()));
+        pstmt.setString(10, "test");
         pstmt.setString(11, "test");
         pstmt.executeUpdate();
     }
