@@ -105,7 +105,7 @@ public class AddAppointmentController implements Initializable {
                 .format(end);
 
         Appointment a = new Appointment();
-        a.setCustomerid(1);
+        a.setCustomerid(getCustomerId(customer.getSelectionModel().getSelectedItem().toString()));
         a.setTitle(title.getText());
         a.setDescription(description.getSelectionModel().getSelectedItem().toString());
         a.setLocation(location.getSelectionModel().getSelectedItem().toString());
@@ -125,7 +125,7 @@ public class AddAppointmentController implements Initializable {
         };
 
         AppointmentRow tr = new AppointmentRow(
-                new SimpleStringProperty("1"),
+                new SimpleObjectProperty(a.getCustomerid()),
                 new SimpleStringProperty(String.valueOf(a.getCustomerid())),
                 new SimpleStringProperty(a.getTitle()),
                 new SimpleStringProperty(a.getDescription()),
