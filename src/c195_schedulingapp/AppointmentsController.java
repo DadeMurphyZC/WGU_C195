@@ -147,10 +147,12 @@ public class AppointmentsController implements Initializable {
                             pane.showMessageDialog(null, "Customer Name: "+getCustomerName(Integer.parseInt(customerId))
                                     +"\nCustomer Address: "+tempC.getAddress().getAddress()
                                     +"\nCustomer Phone: "+tempC.getAddress().getPhone());
-                        } catch (SQLException | ClassNotFoundException ex) {
+                        } catch (SQLException ex) {
+                            Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassNotFoundException ex) {
                             Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    });
+                        });
                     Time start = rs.getTime("start");
                     Time end = rs.getTime("end");
                     AppointmentRow tr = new AppointmentRow(
