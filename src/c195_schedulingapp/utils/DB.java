@@ -67,7 +67,7 @@ public class DB {
                 "SELECT * FROM customer "
                 + "JOIN address "
                 + "ON customer.customerId "
-                + "WHERE customer.customerName = ?"
+                + "WHERE customer.customerName = ? "
                 + "AND address.addressId = customer.addressId");
         pstmt.setString(1, name);
         rs = pstmt.executeQuery();
@@ -250,7 +250,10 @@ public class DB {
     public static ResultSet getAppointments() throws SQLException, ClassNotFoundException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
-                "SELECT * from appointment");
+                "SELECT appointmentId, appointment.customerId, title, description, location, contact, url, start, end, customer.customerName "
+                    + "from appointment "
+                    + "join customer "
+                    + "where appointment.customerId = customer.customerid;");
         rs = pstmt.executeQuery();
         return rs;
     }
