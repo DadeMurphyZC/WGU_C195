@@ -44,7 +44,7 @@ public class AddCustomerController implements Initializable {
     HashMap options = new HashMap();
     
     @FXML
-    public synchronized void addCustomer() throws ClassNotFoundException, SQLException {
+    public void addCustomer() throws ClassNotFoundException, SQLException {
         //use TextField input to create a Customer object and add it to the db
         state.getTempCustomer().setCustomerName(name.getText());
         state.getTempCustomer().setCustomerId(nextCustomerId());
