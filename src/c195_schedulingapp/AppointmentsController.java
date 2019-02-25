@@ -138,26 +138,21 @@ public class AppointmentsController implements Initializable {
                     String description = rs.getString("description");
                     String location = rs.getString("location");
                     String contact = rs.getString("contact");
+                    String customerName = rs.getString("customerName");
                     tempC = searchCustomer(getCustomerName(Integer.parseInt(customerId)));
                     Button _url = new Button();
                     _url.setText("Get Customer");
                     JOptionPane pane = new JOptionPane();
                     _url.setOnAction((ActionEvent e) -> {
-                        try {
-                            pane.showMessageDialog(null, "Customer Name: "+getCustomerName(Integer.parseInt(customerId))
-                                    +"\nCustomer Address: "+tempC.getAddress().getAddress()
-                                    +"\nCustomer Phone: "+tempC.getAddress().getPhone());
-                        } catch (SQLException ex) {
-                            Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (ClassNotFoundException ex) {
-                            Logger.getLogger(AppointmentsController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                        pane.showMessageDialog(null, "Customer Name: " + customerName //+getCustomerName(Integer.parseInt(customerId))
+                                +"\nCustomer Address: " + location//+tempC.getAddress().getAddress()
+                                +"\nCustomer Phone: " + contact);//+tempC.getAddress().getPhone());
                         });
                     Time start = rs.getTime("start");
                     Time end = rs.getTime("end");
                     AppointmentRow tr = new AppointmentRow(
                             new ReadOnlyStringWrapper(appointmentId),
-                            new ReadOnlyStringWrapper(customerId),
+                            new ReadOnlyStringWrapper(String.valueOf(customerId)),
                             new ReadOnlyStringWrapper(title),
                             new ReadOnlyStringWrapper(description),
                             new ReadOnlyStringWrapper(location),
