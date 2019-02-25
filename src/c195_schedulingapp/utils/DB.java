@@ -18,9 +18,7 @@ import static c195_schedulingapp.utils.TempDBCustomer.tempCustomer;
 import static c195_schedulingapp.utils.TempDBAppointment.tempAppointment;
 import static c195_schedulingapp.C195_SchedulingApp.state;
 import c195_schedulingapp.Model.Appointment;
-import java.util.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -301,6 +299,19 @@ public class DB {
             pstmt2.setString(6, "test");
             pstmt2.executeUpdate();
         }
+    }
+    
+    public static int nextCustomerId() throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "show table status like 'customer'"
+        );
+        rs = pstmt.executeQuery();
+        int max = 0;
+        while(rs.next()){
+            max = rs.getInt("Auto_increment");
+        }
+        return max;
     }
     
     public static void updateCustomer(String name, String updated, String address, String postalCode, String phone, int id) throws ClassNotFoundException, SQLException{
