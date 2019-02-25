@@ -7,6 +7,7 @@ package c195_schedulingapp;
 
 import static c195_schedulingapp.C195_SchedulingApp.state;
 import static c195_schedulingapp.CustomersController.customers;
+import static c195_schedulingapp.utils.DB.nextCustomerId;
 import c195_schedulingapp.Model.Address;
 import c195_schedulingapp.utils.DB;
 import static c195_schedulingapp.utils.DB.getCities;
@@ -46,6 +47,7 @@ public class AddCustomerController implements Initializable {
     public synchronized void addCustomer() throws ClassNotFoundException, SQLException {
         //use TextField input to create a Customer object and add it to the db
         state.getTempCustomer().setCustomerName(name.getText());
+        state.getTempCustomer().setCustomerId(nextCustomerId());
         state.getTempCustomer().setAddress(new Address(address.getText(),address2.getText(),1,postalCode.getText(),phone.getText()));
         DB.addCustomerToDB(state.getTempCustomer());
         TableRow tr = new TableRow(
