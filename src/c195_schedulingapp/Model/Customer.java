@@ -9,8 +9,8 @@ import static c195_schedulingapp.utils.DB.getCityName;
 import java.sql.SQLException;
 
 public class Customer {
-    private int addressId, active, customerId;
-    private String customerName, address1, phone;
+    private int addressId, active, customerId, cityId;
+    private String customerName, address1, phone, postalCode, city;
     private Address address;
     
     public Customer(){};
@@ -25,46 +25,16 @@ public class Customer {
         this.phone = address.getPhone(); 
     }
 
-    public String getAddress1() {
-        return address1;
-    }
-
-    public void setAddress1(String address1) {
-        this.address1 = address1;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
+    public Customer(int addressId, int customerId, int cityId, String customerName, String address1, String phone, String postalCode, String city, Address address) {
+        this.addressId = addressId;
         this.customerId = customerId;
-    }
-    
-    
-    
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
+        this.cityId = cityId;
         this.customerName = customerName;
+        this.address = address;
+        this.address1 = address1;
+        this.phone = phone;
+        this.postalCode = postalCode;
+        this.city = city;
     }
 
     public int getAddressId() {
@@ -81,6 +51,70 @@ public class Customer {
 
     public void setActive(int active) {
         this.active = active;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getAddress1() {
+        return address1;
+    }
+
+    public void setAddress1(String address1) {
+        this.address1 = address1;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
