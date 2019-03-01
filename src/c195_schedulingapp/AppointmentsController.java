@@ -15,6 +15,7 @@ import c195_schedulingapp.utils.AppointmentRow;
 import static c195_schedulingapp.utils.DB.getAppointments;
 import static c195_schedulingapp.utils.DB.searchAppointment;
 import static c195_schedulingapp.utils.DB.deleteAppointment;
+import static c195_schedulingapp.utils.DB.getCustomerFullClass;
 import static c195_schedulingapp.utils.DB.getCustomerName;
 import static c195_schedulingapp.utils.DB.searchCustomer;
 import java.io.IOException;
@@ -139,7 +140,7 @@ public class AppointmentsController implements Initializable {
                     String location = rs.getString("location");
                     String contact = rs.getString("contact");
                     String customerName = rs.getString("customerName");
-                    tempC = searchCustomer(getCustomerName(Integer.parseInt(customerId)));
+                    tempC = getCustomerFullClass(getCustomerName(Integer.parseInt(customerId)));
                     Button _url = new Button();
                     _url.setText("Get Customer");
                     JOptionPane pane = new JOptionPane();
