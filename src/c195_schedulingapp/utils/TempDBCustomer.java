@@ -21,6 +21,8 @@ public class TempDBCustomer {
     public static Customer tempCustomer(ResultSet rs) throws SQLException{
         Customer temp = new Customer();
                 temp.setAddressId(rs.getInt("addressId"));
+                temp.setCustomerId(rs.getInt("customerId"));
+                temp.setCityId(rs.getInt("cityId"));
                 temp.setCustomerName(rs.getString("customerName"));
                 temp.setAddress(new Address(rs.getString("address"), 
                         rs.getString("address2"), rs.getString("postalCode"), 
@@ -29,6 +31,8 @@ public class TempDBCustomer {
                         + " " + temp.getAddress().getAddress2() 
                         + " ," + temp.getAddress().getPostalCode());
                 temp.setPhone(temp.getAddress().getPhone());
+                temp.setPostalCode(temp.getAddress().getPostalCode());
+                temp.setCity(rs.getString("city"));
         return temp;
     }
     
