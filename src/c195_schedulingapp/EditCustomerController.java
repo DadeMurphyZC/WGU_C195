@@ -42,7 +42,7 @@ public class EditCustomerController implements Initializable {
     HashMap options = new HashMap();
     
     @FXML public synchronized void editCustomer() throws ClassNotFoundException, SQLException{
-        state.getTempCustomer().setAddress(new Address(address.getText(),address2.getText(),1,postalCode.getText(),phone.getText()));
+        state.getTempCustomer().setAddress(new Address(address.getText(),address2.getText(),1,postalCode.getText(),phone.getText()));    
         updateCustomer(state.getTempCustomer().getCustomerName(), name.getText(), address.getText(), postalCode.getText(), phone.getText(), state.getTempCustomer().getAddressId());
         TableRow tr = new TableRow(
                             new SimpleObjectProperty(state.getTempCustomer().getCustomerId()),
@@ -73,10 +73,9 @@ public class EditCustomerController implements Initializable {
         postalCode.setText(state.getTempCustomer().getAddress().getPostalCode());
         phone.setText(state.getTempCustomer().getPhone());
         city.getItems().clear();
+        city.getSelectionModel().select(state.getTempCustomer().getCity());
         try {options = getCities();}
         catch (ClassNotFoundException | SQLException ex) {System.out.println(ex);}
-        try {city.getSelectionModel().select(state.getTempCustomer().getCity(state.getTempCustomer().getAddress().getCityId()));
-        } catch (ClassNotFoundException | SQLException ex) {System.out.println(ex);}
         options.forEach((k,v)->city.getItems().add(v));
     }    
     
