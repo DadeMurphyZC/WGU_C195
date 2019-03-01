@@ -97,7 +97,7 @@ public class CustomersController implements Initializable {
         state.clearTempIndex();
         selected = (TableRow) customerTable.getSelectionModel().getSelectedItem();
         System.out.println("Selected: " + selected.getcustomerName());
-        state.setTempCustomer(DB.searchCustomer(selected.getcustomerName().getValue()));
+        state.setTempCustomer(DB.getCustomerFullClass(selected.getcustomerName().getValue()));
     }
 
     @FXML
