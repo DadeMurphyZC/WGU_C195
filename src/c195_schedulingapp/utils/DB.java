@@ -78,6 +78,24 @@ public class DB {
         return temp;
     }
     
+    public static Customer getCustomerFullClass(String name) throws ClassNotFoundException, SQLException{
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "SELECT customer.customerId, customer.customerName, customer.addressId, address.address, address.address2, address.postalCode, address.phone, address.cityId, city.city "
+                        + "FROM customer "
+                        + "JOIN address on customer.addressId = address.addressId "
+                        + "JOIN city on address.cityId = city.cityId "
+                        + "WHERE customer.customerName = ?"
+        );
+        pstmt.setString(1, name);
+        rs = pstmt.executeQuery();
+        Customer temp = null;
+        while(rs.next()){
+            temp = tempCustomer(rs);
+        }
+        return temp;
+    }
+    
     public static String getCustomerName(int id) throws SQLException, ClassNotFoundException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
