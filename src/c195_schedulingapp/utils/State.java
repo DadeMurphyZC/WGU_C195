@@ -95,7 +95,7 @@ public class State<T> {
     }
     
     public void clearTempCustomer(){
-        this.tempCustomer = null;
+        this.tempCustomer = new Customer();
     }
     
     public void clearTempAppointment(){
