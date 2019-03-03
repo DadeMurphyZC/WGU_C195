@@ -9,6 +9,7 @@ import static c195_schedulingapp.C195_SchedulingApp.state;
 import static c195_schedulingapp.CustomersController.customers;
 import static c195_schedulingapp.utils.DB.nextCustomerId;
 import c195_schedulingapp.Model.Address;
+import c195_schedulingapp.Model.Customer;
 import c195_schedulingapp.utils.DB;
 import static c195_schedulingapp.utils.DB.getCities;
 import java.net.URL;
@@ -46,6 +47,7 @@ public class AddCustomerController implements Initializable {
     @FXML
     public void addCustomer() throws ClassNotFoundException, SQLException {
         //use TextField input to create a Customer object and add it to the db
+        state.clearTempCustomer();
         state.getTempCustomer().setCustomerName(name.getText());
         state.getTempCustomer().setCustomerId(nextCustomerId());
         state.getTempCustomer().setAddress(new Address(address.getText(),address2.getText(),1,postalCode.getText(),phone.getText()));
@@ -57,7 +59,6 @@ public class AddCustomerController implements Initializable {
                             new SimpleStringProperty(state.getTempCustomer().getAddress().getPhone())
                     );
         customers.add(tr);
-        state.clearTempCustomer();
         Stage stage = (Stage) saveBtn.getScene().getWindow();
         stage.close();
     }
