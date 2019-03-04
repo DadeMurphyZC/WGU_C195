@@ -18,8 +18,13 @@ import static c195_schedulingapp.utils.TempDBCustomer.tempCustomer;
 import static c195_schedulingapp.utils.TempDBAppointment.tempAppointment;
 import static c195_schedulingapp.C195_SchedulingApp.state;
 import c195_schedulingapp.Model.Appointment;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -183,18 +188,21 @@ public class DB {
         return rs;
     }
     
-    public static HashMap getApptStartTimes() throws ClassNotFoundException, SQLException{
+    public static ArrayList getApptStartTimes() throws ClassNotFoundException, SQLException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
-                "SELECT hour(start) as start, hour(end) as end from appointment"
+                "SELECT start from appointment"
         );
         rs = pstmt.executeQuery();
-        HashMap startTimes = new HashMap();
-        while(rs.next()){startTimes.put(rs.getInt("start"), rs.getInt("end"));};
+        ArrayList startTimes = new ArrayList();
+        while(rs.next()){
+            String date = rs.getTimestamp("start").toString();
+            startTimes.add(date);
+        }
         return startTimes;
     }
 
-    
+  
     public static ResultSet getApptsByMonth(String month) throws ClassNotFoundException, SQLException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
