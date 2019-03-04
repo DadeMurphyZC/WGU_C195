@@ -26,7 +26,10 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
 import static c195_schedulingapp.AppointmentsController.appointments;
-import java.sql.Time;
+import static c195_schedulingapp.utils.DB.getApptStartTimes;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Alert;
 
@@ -103,7 +106,24 @@ public class AddAppointmentController implements Initializable {
                 .ofPattern("yyyy-MM-dd HH:mm:ss")
                 .toFormat()
                 .format(end);
+        Integer checkFormatStart = Integer.parseInt(DateTimeFormatter.ofPattern("H").toFormat().format(start));
+        Integer checkFormatEnd = Integer.parseInt(DateTimeFormatter.ofPattern("H").toFormat().format(end));
 
+        if (checkFormatStart < 8 || checkFormatEnd > 17) {
+            Alert hoursCheck = new Alert(Alert.AlertType.ERROR);
+            hoursCheck.setContentText("Start and End hours must fall between 08:00am and 05:00pm");
+            hoursCheck.setTitle("Business hours error");
+            hoursCheck.show();
+            throw new IllegalArgumentException("Hour out of range!");
+        };
+        
+        if(getApptStartTimes().contains(startFormatted+".0")){
+            Alert startConflict = new Alert(Alert.AlertType.ERROR);
+            startConflict.setContentText("An appointment with that date and start time already exists");
+            startConflict.setTitle("Date/Time Conflict");
+            startConflict.show();
+            throw new IllegalArgumentException("Date/Start conflict - already exists");
+        }
         Appointment a = new Appointment();
         a.setCustomerid(getCustomerId(customer.getSelectionModel().getSelectedItem().toString()));
         a.setTitle(title.getText());
@@ -114,15 +134,6 @@ public class AddAppointmentController implements Initializable {
         a.setStart(startFormatted);
         a.setEnd(endFormatted);
         addAppointment(a);
-        Integer checkFormatStart = Integer.parseInt(DateTimeFormatter.ofPattern("H").toFormat().format(start));
-        Integer checkFormatEnd = Integer.parseInt(DateTimeFormatter.ofPattern("H").toFormat().format(end));
-        if(checkFormatStart < 8 || checkFormatEnd > 17){
-            Alert hoursCheck = new Alert(Alert.AlertType.ERROR);
-            hoursCheck.setContentText("Start and End hours must fall between 08:00am and 05:00pm");
-            hoursCheck.setTitle("Business hours error");
-            hoursCheck.show();
-            throw new IllegalArgumentException("Hour out of range!");
-        };
 
         AppointmentRow tr = new AppointmentRow(
                 new SimpleObjectProperty(a.getCustomerid()),
