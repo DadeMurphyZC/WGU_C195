@@ -45,7 +45,7 @@ public class AppointmentRow {
         }
         
         public int getAppointmentIdInt() {
-            return appointmentId.getValue();
+            return this.appointmentId.getValue();
         }
 
         public void setAppointmentId(ObservableValue<Integer> appointmentId) {
