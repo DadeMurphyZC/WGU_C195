@@ -17,6 +17,7 @@ public class TempDBAppointment {
     public static Appointment tempAppointment(ResultSet rs) throws SQLException{
         Appointment temp = new Appointment();
                 temp.setAppointmentId(rs.getInt("appointmentid"));
+                temp.setCustomerid(rs.getInt("customerId"));
                 temp.setTitle(rs.getString("title"));
                 temp.setDescription(rs.getString("description"));
                 temp.setLocation(rs.getString("location"));
