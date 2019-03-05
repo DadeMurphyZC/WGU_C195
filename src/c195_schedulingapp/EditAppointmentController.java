@@ -23,6 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -114,6 +115,8 @@ public class EditAppointmentController implements Initializable {
                 Timestamp.valueOf(endFormatted)
                 );
         AppointmentRow ar = new AppointmentRow();
+        ar.setAppointmentId(new SimpleObjectProperty(String.valueOf(state.getTempAppointment().getAppointmentId())));
+        ar.setCustomerId(new SimpleStringProperty(String.valueOf(state.getTempAppointment().getCustomerid())));
         ar.setContact(new SimpleStringProperty(contact.getSelectionModel().getSelectedItem().toString()));
         ar.setDescription(new SimpleStringProperty(description.getSelectionModel().getSelectedItem().toString()));
         ar.setEnd(new SimpleStringProperty(Timestamp.valueOf(end).toString()));
