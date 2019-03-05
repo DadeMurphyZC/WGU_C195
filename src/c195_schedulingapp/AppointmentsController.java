@@ -23,6 +23,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
@@ -39,7 +40,7 @@ import javax.swing.JOptionPane;
  */
 public class AppointmentsController implements Initializable {
     
-    @FXML private TableColumn<AppointmentRow, String> idCol;
+    @FXML private TableColumn<AppointmentRow, Integer> idCol;
     @FXML private TableColumn<AppointmentRow, String> customerCol;
     @FXML private TableColumn<AppointmentRow, String> titleCol;
     @FXML private TableColumn<AppointmentRow, String> descriptionCol;
@@ -86,7 +87,7 @@ public class AppointmentsController implements Initializable {
         @FXML public void deleteAppt() throws ClassNotFoundException, SQLException{
         state.clearTempCustomer();
         selected = (AppointmentRow) appointmentsTable.getSelectionModel().getSelectedItem();
-        deleteAppointment(Integer.parseInt(selected.getAppointmentId().getValue()));
+        deleteAppointment(selected.getAppointmentIdInt());
         state.setTempIndex(appointmentsTable.getSelectionModel().getSelectedIndex());
         appointments.remove(state.getTempIndex().intValue());
         state.clearTempCustomer();
@@ -98,7 +99,7 @@ public class AppointmentsController implements Initializable {
         state.clearTempIndex();
         selected = (AppointmentRow) appointmentsTable.getSelectionModel().getSelectedItem();
         System.out.println("Selected: "+selected.getAppointmentId());
-        state.setTempAppointment(searchAppointment(Integer.parseInt(selected.getAppointmentId().getValue())));
+        state.setTempAppointment(searchAppointment(selected.getAppointmentIdInt()));
     }
       
     @FXML public void editAppointment() throws IOException, ClassNotFoundException, SQLException{
@@ -133,7 +134,7 @@ public class AppointmentsController implements Initializable {
             endCol.setCellValueFactory(cellData -> {return cellData.getValue().getEnd();});
             try{
                 while (rs.next()) {
-                    String appointmentId = rs.getString("appointmentId");
+                    int appointmentId = rs.getInt("appointmentId");
                     String customerId = rs.getString("customerId");
                     String title = rs.getString("title");
                     String description = rs.getString("description");
@@ -145,14 +146,16 @@ public class AppointmentsController implements Initializable {
                     _url.setText("Get Customer");
                     JOptionPane pane = new JOptionPane();
                     _url.setOnAction((ActionEvent e) -> {
-                        pane.showMessageDialog(null, "Customer Name: " + customerName //+getCustomerName(Integer.parseInt(customerId))
-                                +"\nCustomer Address: " + location//+tempC.getAddress().getAddress()
-                                +"\nCustomer Phone: " + contact);//+tempC.getAddress().getPhone());
+                        pane.showMessageDialog(null, "Name: " + customerName //+getCustomerName(Integer.parseInt(customerId))
+                                +"\nAddress: " + tempC.getAddress().getAddress()//+tempC.getAddress().getAddress()
+                                +"\nPhone: " + tempC.getPhone()
+                                +"\nCity: " + tempC.getCity()
+                                +"\nZip: " + tempC.getPostalCode());//+tempC.getAddress().getPhone());
                         });
                     Time start = rs.getTime("start");
                     Time end = rs.getTime("end");
                     AppointmentRow tr = new AppointmentRow(
-                            new ReadOnlyStringWrapper(appointmentId),
+                            new ReadOnlyObjectWrapper(appointmentId),
                             new ReadOnlyStringWrapper(String.valueOf(customerId)),
                             new ReadOnlyStringWrapper(title),
                             new ReadOnlyStringWrapper(description),
