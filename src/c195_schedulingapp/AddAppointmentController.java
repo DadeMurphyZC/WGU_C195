@@ -26,12 +26,15 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
 import static c195_schedulingapp.AppointmentsController.appointments;
+import c195_schedulingapp.Model.Customer;
 import static c195_schedulingapp.utils.DB.getApptStartTimes;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -134,17 +137,35 @@ public class AddAppointmentController implements Initializable {
         a.setStart(startFormatted);
         a.setEnd(endFormatted);
         addAppointment(a);
-
+        String startTime = DateTimeFormatter
+                .ofPattern("HH:mm:ss")
+                .toFormat()
+                .format(start);
+        String endTime = DateTimeFormatter
+                .ofPattern("HH:mm:ss")
+                .toFormat()
+                .format(end);
+        Customer c = getCustomerFullClass(customer.getSelectionModel().getSelectedItem().toString());
+        Button _url = new Button();
+                    _url.setText("Get Customer");
+                    JOptionPane pane = new JOptionPane();
+                    _url.setOnAction((ActionEvent e) -> {
+                        pane.showMessageDialog(null, "Name: " + c.getCustomerName() //+getCustomerName(Integer.parseInt(customerId))
+                                +"\nAddress: " + c.getAddress().getAddress()//+tempC.getAddress().getAddress()
+                                +"\nPhone: " + c.getPhone()
+                                +"\nCity: " + c.getCity()
+                                +"\nZip: " + c.getPostalCode());//+tempC.getAddress().getPhone());
+                        });
         AppointmentRow tr = new AppointmentRow(
-                new SimpleObjectProperty(a.getCustomerid()),
+                new SimpleObjectProperty(a.getAppointmentId()),
                 new SimpleStringProperty(String.valueOf(a.getCustomerid())),
                 new SimpleStringProperty(a.getTitle()),
                 new SimpleStringProperty(a.getDescription()),
                 new SimpleStringProperty(a.getLocation()),
                 new SimpleStringProperty(a.getContact()),
-                new SimpleObjectProperty(a.getUrl()),
-                new SimpleStringProperty(a.getStart()),
-                new SimpleStringProperty(a.getEnd())
+                new SimpleObjectProperty(_url),
+                new SimpleStringProperty(startTime),
+                new SimpleStringProperty(endTime)
         );
         appointments.add(tr);
         Stage stage = (Stage) save.getScene().getWindow();
