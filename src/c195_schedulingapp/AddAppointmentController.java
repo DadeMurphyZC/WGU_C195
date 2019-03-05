@@ -27,6 +27,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
 import static c195_schedulingapp.AppointmentsController.appointments;
 import c195_schedulingapp.Model.Customer;
+import c195_schedulingapp.utils.DB;
 import static c195_schedulingapp.utils.DB.getApptStartTimes;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -128,6 +129,7 @@ public class AddAppointmentController implements Initializable {
             throw new IllegalArgumentException("Date/Start conflict - already exists");
         }
         Appointment a = new Appointment();
+        a.setAppointmentId(DB.nextAppointmentId());
         a.setCustomerid(getCustomerId(customer.getSelectionModel().getSelectedItem().toString()));
         a.setTitle(title.getText());
         a.setDescription(description.getSelectionModel().getSelectedItem().toString());
