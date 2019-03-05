@@ -343,6 +343,19 @@ public class DB {
         return max;
     }
     
+    public static int nextAppointmentId() throws ClassNotFoundException, SQLException {
+        conn = dbConnect();
+        pstmt = conn.prepareStatement(
+                "show table status like 'appointment'"
+        );
+        rs = pstmt.executeQuery();
+        int max = 0;
+        while(rs.next()){
+            max = rs.getInt("Auto_increment");
+        }
+        return max;
+    }
+    
     public static void updateCustomer(String name, String updated, String address, String postalCode, String phone, int id) throws ClassNotFoundException, SQLException{
         conn = dbConnect();
         pstmt = conn.prepareStatement(
