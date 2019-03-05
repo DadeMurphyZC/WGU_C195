@@ -17,7 +17,10 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button layoutX="237.0" layoutY="14.0" mnemonicParsing="false" onAction="#openCalendar" prefWidth="100.0" style="-fx-background-color: none;" text="Calendar" textFill="WHITE" />
+            <Button layoutX="237.0" layoutY="14.0" mnemonicParsing="false" onAction="#openCalendar" prefWidth="100.0" style="-fx-background-color: none;" text="Calendar" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Button layoutX="337.0" layoutY="14.0" mnemonicParsing="false" onAction="#openReports" prefWidth="100.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
