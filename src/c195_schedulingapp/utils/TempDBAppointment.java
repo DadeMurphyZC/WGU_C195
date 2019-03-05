@@ -23,8 +23,8 @@ public class TempDBAppointment {
                 temp.setLocation(rs.getString("location"));
                 temp.setContact(rs.getString("contact"));
                 temp.setUrl(rs.getString("url"));
-                temp.setStart(rs.getString("start"));
-                temp.setEnd(rs.getString("end"));
+                temp.setStart(rs.getTimestamp("start").toString());
+                temp.setEnd(rs.getTimestamp("end").toString());
         return temp;
     }
     
