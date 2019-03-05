@@ -143,10 +143,10 @@ public class EditAppointmentController implements Initializable {
         ar.setCustomerId(new SimpleStringProperty(String.valueOf(state.getTempAppointment().getCustomerid())));
         ar.setContact(new SimpleStringProperty(contact.getSelectionModel().getSelectedItem().toString()));
         ar.setDescription(new SimpleStringProperty(description.getSelectionModel().getSelectedItem().toString()));
+        ar.setStart(new SimpleStringProperty(startTimeFormatted));
         ar.setEnd(new SimpleStringProperty(endTimeFormatted));
         ar.setUrl(new SimpleObjectProperty(_url));
         ar.setLocation(new SimpleStringProperty(location.getSelectionModel().getSelectedItem().toString()));
-        ar.setStart(new SimpleStringProperty(startTimeFormatted));
         ar.setTitle(new SimpleStringProperty(title.getSelectionModel().getSelectedItem().toString()));
         appointments.set(state.getTempIndex(), ar);
         state.clearTempCustomer();
