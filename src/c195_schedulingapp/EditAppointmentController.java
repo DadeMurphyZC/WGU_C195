@@ -8,8 +8,10 @@ package c195_schedulingapp;
 import static c195_schedulingapp.AppointmentsController.appointments;
 import c195_schedulingapp.Model.Appointment;
 import static c195_schedulingapp.C195_SchedulingApp.state;
+import c195_schedulingapp.Model.Customer;
 import c195_schedulingapp.utils.AppointmentRow;
 import static c195_schedulingapp.utils.DB.getCities;
+import static c195_schedulingapp.utils.DB.getCustomerFullClass;
 import static c195_schedulingapp.utils.DB.getCustomersArray;
 import static c195_schedulingapp.utils.DB.getUsers;
 import static c195_schedulingapp.utils.DB.updateAppointment;
@@ -25,12 +27,14 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -114,14 +118,34 @@ public class EditAppointmentController implements Initializable {
                 Timestamp.valueOf(startFormatted),
                 Timestamp.valueOf(endFormatted)
                 );
+        String startTimeFormatted = DateTimeFormatter
+                .ofPattern("HH:mm:ss")
+                .toFormat()
+                .format(start);
+        String endTimeFormatted = DateTimeFormatter
+                .ofPattern("HH:mm:ss")
+                .toFormat()
+                .format(end);
+        Customer c = getCustomerFullClass(customer.getSelectionModel().getSelectedItem().toString());
+        Button _url = new Button();
+        _url.setText("Get Customer");
+        JOptionPane pane = new JOptionPane();
+        _url.setOnAction((ActionEvent e) -> {
+            pane.showMessageDialog(null, "Name: " + c.getCustomerName() //+getCustomerName(Integer.parseInt(customerId))
+                    + "\nAddress: " + c.getAddress().getAddress()//+tempC.getAddress().getAddress()
+                    + "\nPhone: " + c.getPhone()
+                    + "\nCity: " + c.getCity()
+                    + "\nZip: " + c.getPostalCode());//+tempC.getAddress().getPhone());
+        });
         AppointmentRow ar = new AppointmentRow();
         ar.setAppointmentId(new SimpleObjectProperty(String.valueOf(state.getTempAppointment().getAppointmentId())));
         ar.setCustomerId(new SimpleStringProperty(String.valueOf(state.getTempAppointment().getCustomerid())));
         ar.setContact(new SimpleStringProperty(contact.getSelectionModel().getSelectedItem().toString()));
         ar.setDescription(new SimpleStringProperty(description.getSelectionModel().getSelectedItem().toString()));
-        ar.setEnd(new SimpleStringProperty(Timestamp.valueOf(end).toString()));
+        ar.setEnd(new SimpleStringProperty(endTimeFormatted));
+        ar.setUrl(new SimpleObjectProperty(_url));
         ar.setLocation(new SimpleStringProperty(location.getSelectionModel().getSelectedItem().toString()));
-        ar.setStart(new SimpleStringProperty(Timestamp.valueOf(start).toString()));
+        ar.setStart(new SimpleStringProperty(startTimeFormatted));
         ar.setTitle(new SimpleStringProperty(title.getSelectionModel().getSelectedItem().toString()));
         appointments.set(state.getTempIndex(), ar);
         state.clearTempCustomer();
