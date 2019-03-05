@@ -10,6 +10,7 @@ import c195_schedulingapp.Model.Appointment;
 import static c195_schedulingapp.C195_SchedulingApp.state;
 import c195_schedulingapp.Model.Customer;
 import c195_schedulingapp.utils.AppointmentRow;
+import c195_schedulingapp.utils.DB;
 import static c195_schedulingapp.utils.DB.getCities;
 import static c195_schedulingapp.utils.DB.getCustomerFullClass;
 import static c195_schedulingapp.utils.DB.getCustomersArray;
@@ -85,11 +86,11 @@ public class EditAppointmentController implements Initializable {
         generateHours().forEach((t)->endTime.getItems().add(t));
     }
     
-    public void populateForm(){
+    public void populateForm() throws SQLException, ClassNotFoundException{
         Appointment appt = state.getTempAppointment();
         contact.getSelectionModel().select(appt.getContact());
         title.getSelectionModel().select(appt.getTitle());
-        customer.getSelectionModel().select(appt.getCustomerid());
+        customer.getSelectionModel().select(DB.getCustomerName(appt.getCustomerid()));
         description.getSelectionModel().select(appt.getDescription());
         location.getSelectionModel().select(appt.getLocation());
         date.setValue(LocalDate.parse(state.getTempAppointment().getStart().substring(0, 10)));
