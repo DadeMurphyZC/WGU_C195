@@ -139,7 +139,7 @@ public class EditAppointmentController implements Initializable {
                     + "\nZip: " + c.getPostalCode());//+tempC.getAddress().getPhone());
         });
         AppointmentRow ar = new AppointmentRow();
-        ar.setAppointmentId(new SimpleObjectProperty(String.valueOf(state.getTempAppointment().getAppointmentId())));
+        ar.setAppointmentId(new SimpleObjectProperty(state.getTempAppointment().getAppointmentId()));
         ar.setCustomerId(new SimpleStringProperty(String.valueOf(state.getTempAppointment().getCustomerid())));
         ar.setContact(new SimpleStringProperty(contact.getSelectionModel().getSelectedItem().toString()));
         ar.setDescription(new SimpleStringProperty(description.getSelectionModel().getSelectedItem().toString()));
