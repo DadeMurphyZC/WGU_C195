@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
  * @author cfonseca
  */
 public class AppointmentRow {
-    private ObservableValue<String> appointmentId;
+    private ObservableValue<Integer> appointmentId;
     private ObservableValue<String> customerId;
     private ObservableValue<String> title;
     private ObservableValue<String> description;
@@ -25,7 +25,7 @@ public class AppointmentRow {
     private ObservableValue<String> start;
     private ObservableValue<String> end;
 
-        public AppointmentRow(ObservableValue<String> appointmentId, ObservableValue<String> customerId, ObservableValue<String> title, ObservableValue<String> description, ObservableValue<String> location, ObservableValue<String> contact, ObservableValue<Button> url, ObservableValue<String> start, ObservableValue<String> end) {
+        public AppointmentRow(ObservableValue<Integer> appointmentId, ObservableValue<String> customerId, ObservableValue<String> title, ObservableValue<String> description, ObservableValue<String> location, ObservableValue<String> contact, ObservableValue<Button> url, ObservableValue<String> start, ObservableValue<String> end) {
             this.appointmentId = appointmentId;
             this.customerId = customerId;
             this.title = title;
@@ -40,14 +40,18 @@ public class AppointmentRow {
     public AppointmentRow() {  
     }
         
-        public ObservableValue<String> getAppointmentId() {
+        public ObservableValue<Integer> getAppointmentId() {
             return appointmentId;
         }
-
-        public void setAppointmentId(ObservableValue<String> appointmentId) {
-            this.appointmentId = appointmentId;
+        
+        public int getAppointmentIdInt() {
+            return appointmentId.getValue();
         }
 
+        public void setAppointmentId(ObservableValue<Integer> appointmentId) {
+            this.appointmentId = appointmentId;
+        }
+        
         public ObservableValue<String> getCustomerId() {
             return customerId;
         }
